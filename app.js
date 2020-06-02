@@ -5,6 +5,10 @@ const app = express();
 const users = require("./routes/api/users");
 const cappers = require("./routes/api/cappers");
 const bodyparser = require("body-parser");
+const passport = require('passport');
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 app.use(bodyparser.urlencoded({
   extended: false
@@ -14,7 +18,6 @@ app.use(bodyparser.json());
 app.get("/", (req, res) => {
   res.send("Hello world")
 })
-
 app.use("/api/users", users)
 app.use("/api/cappers", cappers)
 

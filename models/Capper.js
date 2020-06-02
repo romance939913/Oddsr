@@ -16,11 +16,13 @@ const CapperSchema = new Schema({
   },
   wins: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   losses: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   date: {
     type: Date,

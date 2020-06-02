@@ -4,8 +4,8 @@ const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const keys = require('../../config/keys');
 const jwt = require('jsonwebtoken');
-const validateRegisterInput = require('../../validations/register');
-const validateLoginInput = require('../../validations/login');
+const validateRegisterInput = require('../../validations/userRegister');
+const validateLoginInput = require('../../validations/userLogin');
 
 router.get("/test", (req, res) => {
   res.json({ msg: "this is the users route" })
@@ -64,7 +64,8 @@ router.post("/login", (req, res) => {
             const payload = {
               id: user.id,
               username: user.username,
-              email: user.email
+              email: user.email,
+              type: 'user'
             }
             jwt.sign(
               payload, 
