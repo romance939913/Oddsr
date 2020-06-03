@@ -1,0 +1,20 @@
+.splash-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.splash-background-container {
+  position: relative;
+}
+
+.splash-jumbotron-background {
+  background-image: url('./vegas.jpg');
+  height: 950px;
+  opacity: 0.5;
+}
+
+.splash-jumbotron-content {
+  position: absolute;
+}

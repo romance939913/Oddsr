@@ -22,6 +22,16 @@ router.get("/",
   }
 )
 
+router.get("/:capper_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Capper
+      .find({ _id: req.params.capper_id })
+      .then(capper => res.json(capper))
+      .catch(err => res.json(err))
+  }
+)
+
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
