@@ -5,14 +5,15 @@ import { Switch, Route } from 'react-router-dom';
 import Splash from './splash/splash';
 import Login from './sessions/login';
 import Leaderboard from './feed/leaderboard';
+import Signup from './sessions/signup';
 
 const App = () => (
   <div>
-    <Route exact path="/" component={Splash}/>
     <Switch>
+      <AuthRoute exact path="/" component={Splash}/>
       <AuthRoute exact path="/login" component={Login} />
+      <AuthRoute exact path="/signup" component={Signup} />
       <ProtectedRoute exact path="/leaderboard" component={Leaderboard}/>
-
     </Switch>
   </div>
 );
