@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signup } from '../../actions/session_actions';
+import { signup, clearSessionErrors } from '../../actions/session_actions';
 
 const mapStateToProps = (state, ownProps) => ({
   errors: state.errors.session
 });
 
 const mapDispatchToProps = dispatch => ({
-  signup: (user) => dispatch(signup(user))
+  signup: (user) => dispatch(signup(user)),
+  clearSignupErrors: () => dispatch(clearSessionErrors())
 })
 
 class Signup extends React.Component {
@@ -27,6 +28,7 @@ class Signup extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.signup(user)
+    setTimeout(() => { this.props.clearSignupErrors() }, 3000);
   }
 
   update(field) {
@@ -36,6 +38,13 @@ class Signup extends React.Component {
   }
 
   render() {
+    let errorsArr = [];
+    Object.values(this.props.errors).forEach((err, i) => {
+      errorsArr.push(
+        <li key={`error-${i}`}>{err}</li>
+      )
+    })
+
     return (
       <div>
         <h1>Set yourself up for victory today</h1>
@@ -74,6 +83,7 @@ class Signup extends React.Component {
             value="Get Started"
             className="signup-input-field signup-submit"
           />
+          <ul>{errorsArr}</ul>
         </form>
         <Link to="/login">Already a user? Login here</Link>
       </div>

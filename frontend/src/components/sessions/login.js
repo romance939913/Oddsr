@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login } from '../../actions/session_actions';
+import { login, clearSessionErrors } from '../../actions/session_actions';
 
 const mapStateToProps = (state, ownProps) => ({
   errors: state.errors.session
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (user) => dispatch(login(user))
+  login: (user) => dispatch(login(user)),
+  clearLoginErrors: () => dispatch(clearSessionErrors())
 }) 
 
 class Login extends React.Component {
@@ -19,13 +20,13 @@ class Login extends React.Component {
       password: '',
     }
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.login(user)
+    this.props.login(user);
+    setTimeout(() => { this.props.clearLoginErrors() }, 3000);
   }
 
   update(field) {
@@ -34,19 +35,14 @@ class Login extends React.Component {
     }
   }
 
-  renderErrors() {
-    return (
-      <ul>
-        {Object.keys(this.props.errors).map((error, i) => (
-          <li key={`error-${i}`}>
-            {this.props.errors[error]}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
   render() {
+    let errorsArr = [];
+    Object.values(this.props.errors).forEach((err, i) => {
+      errorsArr.push(
+        <li key={`error-${i}`}>{err}</li>
+      )
+    })
+
     return (
       <div>
         <div>
@@ -71,8 +67,8 @@ class Login extends React.Component {
               value="Get Started"
               className="signup-input-field signup-submit"
             />
-            {this.renderErrors()}
           </form>
+          <ul>{errorsArr}</ul>
           <Link to="/">Back to Splash Page</Link>
         </div>
       </div>
