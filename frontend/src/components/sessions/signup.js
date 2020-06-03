@@ -1,15 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { signup } from '../../actions/session_actions';
 
-// const mapStateToProps = (state, ownProps) => ({
-//   history: ownProps.history,
-//   loggedIn: state.session.isAuthenticated,
-//   username: state.session.user.username
-// });
+const mapStateToProps = (state, ownProps) => ({
+  errors: state.errors.session
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   logout: () => dispatch(logout())
-// })
+const mapDispatchToProps = dispatch => ({
+  signup: (user) => dispatch(signup(user))
+})
 
 class Signup extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Signup extends React.Component {
       username: '',
       email: '',
       password: '',
-      buying_power: ''
+      password2: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -63,14 +63,22 @@ class Signup extends React.Component {
             onChange={this.update('password')}
           />
           <input
+            type="password"
+            placeholder="password confirmation"
+            className="signup-input-field"
+            value={this.state.password2}
+            onChange={this.update('password2')}
+          />
+          <input
             type="submit"
             value="Get Started"
             className="signup-input-field signup-submit"
           />
         </form>
+        <Link to="/login">Already a user? Login here</Link>
       </div>
     );
   }
 }
 
-export default Signup;
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = '/login';
     }
   } else {
+    
     store = configureStore({});
   }
   const root = document.getElementById('root');

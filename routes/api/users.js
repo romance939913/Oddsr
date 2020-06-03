@@ -13,7 +13,6 @@ router.get("/test", (req, res) => {
 
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
-  
   if (!isValid) {
     return res.status(400).json(errors);
   }
@@ -35,7 +34,24 @@ router.post("/register", (req, res) => {
             newUser.password = hash
             newUser
               .save()
-              .then(user => res.json(user))
+              .then(user => {
+                const payload = {
+                  id: user.id,
+                  username: user.username,
+                  email: user.email,
+                  type: 'user'
+                }
+                jwt.sign(
+                  payload,
+                  keys.secretOrKey,
+                  { expiresIn: 3600 },
+                  (err, token) => {
+                    res.json({
+                      success: true,
+                      token: "Bearer " + token
+                    });
+                  })
+              })
               .catch(err => console.log(err))
           })
         })
