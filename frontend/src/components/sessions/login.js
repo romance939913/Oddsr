@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 import { Link } from 'react-router-dom';
 import { login, clearSessionErrors } from '../../actions/session_actions';
 
@@ -43,6 +45,23 @@ class Login extends React.Component {
       )
     })
 
+    const responseFacebook = (response) => {
+      console.log(response);
+    }
+    
+    const responseSuccessGoogle = (response) => {
+      let user = {
+        email: response.Tt.Du,
+        password: `google-${response.googleId}`,
+      }
+      this.props.login(user)
+    }
+
+    const responseErrorGoogle = (response) => {
+      console.log('poopy');
+      console.log(response);
+    }
+
     return (
       <div>
         <div>
@@ -68,6 +87,19 @@ class Login extends React.Component {
               className="signup-input-field signup-submit"
             />
           </form>
+          <GoogleLogin
+            clientId="590527218773-92a9untpqntbcajbpab9eju8gql06m2c.apps.googleusercontent.com"
+            buttonText="Login with Google"
+            onSuccess={responseSuccessGoogle}
+            onFailure={responseErrorGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
+          <FacebookLogin
+            appId="1088597931155576"
+            autoLoad={true}
+            fields="name,email,picture"
+            onClick={componentClicked}
+            callback={responseFacebook} />
           <ul>{errorsArr}</ul>
           <Link to="/">Back to Splash Page</Link>
         </div>
