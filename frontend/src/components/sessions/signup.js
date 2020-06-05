@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 import { Link } from 'react-router-dom';
 import { signup, clearSessionErrors } from '../../actions/session_actions';
 
@@ -23,13 +24,35 @@ class Signup extends React.Component {
       password2: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.responseSuccessGoogle = this.responseSuccessGoogle.bind(this);
+    this.responseFacebook = this.responseFacebook.bind(this);
+
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.signup(user)
-    setTimeout(() => { this.props.clearSignupErrors() }, 3000);
+  }
+
+  responseSuccessGoogle(response) {
+    let user = {
+      username: response.Tt.sW,
+      email: response.Tt.Du,
+      password: `google-${response.googleId}`,
+      password2: `google-${response.googleId}`
+    }
+    this.props.signup(user);
+  }
+
+  responseFacebook(response) {
+    let user = {
+      username: response.name,
+      email: response.email,
+      password: `fb-${response.id}`,
+      password2: `fb-${response.id}`
+    }
+    this.props.signup(user);
   }
 
   update(field) {
@@ -46,19 +69,8 @@ class Signup extends React.Component {
       )
     })
 
-    const responseSuccessGoogle = (response) => {
-      let user = {
-        username: response.Tt.sW,
-        email: response.Tt.Du,
-        password: `google-${response.googleId}`,
-        password2: `google-${response.googleId}`
-      }
-      this.props.signup(user)
-    }
-
     const responseErrorGoogle = (response) => {
-      console.log('poopy');
-      console.log(response);
+      console.log('google signup error');
     }
 
     return (
@@ -99,15 +111,21 @@ class Signup extends React.Component {
             value="Get Started"
             className="signup-input-field signup-submit"
           />
-          <ul>{errorsArr}</ul>
         </form>
         <GoogleLogin
           clientId="590527218773-92a9untpqntbcajbpab9eju8gql06m2c.apps.googleusercontent.com"
           buttonText="Use Google Credentials"
-          onSuccess={responseSuccessGoogle}
+          onSuccess={this.responseSuccessGoogle}
           onFailure={responseErrorGoogle}
           cookiePolicy={'single_host_origin'}
         />
+        <FacebookLogin
+          appId="1115979958774257"
+          autoLoad={false}
+          fields="name,email,picture"
+          callback={this.responseFacebook} 
+        />
+        <ul>{errorsArr}</ul>
         <Link to="/login">Already a user? Login here</Link>
       </div>
     );

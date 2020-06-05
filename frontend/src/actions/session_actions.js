@@ -32,9 +32,10 @@ export const signup = user => dispatch => (
     const decoded = jwt_decode(token);
     dispatch(receiveCurrentUser(decoded))
   }) 
-    .catch(err => (
-    dispatch(receiveErrors(err.response.data))
-  ))
+    .catch(err => {
+    dispatch(receiveErrors(err.response.data));
+    setTimeout(() => { dispatch(clearSessionErrors()) }, 3000);
+    })
 );
 
 export const login = user => dispatch => (
@@ -47,6 +48,7 @@ export const login = user => dispatch => (
   })
     .catch(err => {
       dispatch(receiveErrors(err.response.data));
+      setTimeout(() => { dispatch(clearSessionErrors()) }, 3000)
     })
 )
 
