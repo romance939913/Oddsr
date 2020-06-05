@@ -21,7 +21,6 @@ class MainPage extends React.Component {
         <div className="jumbotron-background-container">
           <div className="jumbotron-container">
             <h2 className="jumbotron-header">A Free Market Economy for Beating Vegas</h2>
-            <p className="jumbotron-content">Build you Brand: Join as a Capper today see if you can climb the leaderboard!</p>
           </div>
           <div className="splash-jumbotron-background">
           </div>
