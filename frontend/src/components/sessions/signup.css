@@ -99,6 +99,7 @@
 .signup-errors-container {
   display: flex;
   justify-content: center;
+  padding-top: 15px;
 }
 
 .signup-error {
