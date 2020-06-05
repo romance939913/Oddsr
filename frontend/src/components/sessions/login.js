@@ -49,7 +49,9 @@ class Login extends React.Component {
         email: response.Tt.Du,
         password: `google-${response.googleId}`,
       }
-      this.props.login(user)
+      // this.props.login(user)
+      console.log(user);
+      // password: google - 108621945708507842730
     }
 
     const responseErrorGoogle = (response) => {
