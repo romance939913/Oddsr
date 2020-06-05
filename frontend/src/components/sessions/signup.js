@@ -80,7 +80,7 @@ class Signup extends React.Component {
         </div>
         <div className="signup-container">
           <div className="signup-title-container">
-            <h1>Set yourself up for victory today</h1>
+            <h1>Beat Vegas as a Team</h1>
           </div>
           <form onSubmit={this.handleSubmit} className="form-container">
             <input

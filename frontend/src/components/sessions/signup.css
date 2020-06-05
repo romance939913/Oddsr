@@ -31,7 +31,7 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  width: 40vw;
   margin: 15px 0 15px 0;
 }
 
@@ -41,7 +41,7 @@
   margin-bottom: 15px;
   box-sizing: border-box;
   border-radius: 4px;
-    border: 1px solid black;
+  border: 1px solid black;
   padding: 15px 20px 15px 20px;
   outline: none;
 }

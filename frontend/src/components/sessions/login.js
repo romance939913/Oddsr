@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { Link } from 'react-router-dom';
 import { login, clearSessionErrors } from '../../actions/session_actions';
+import './login.css';
 
 const mapStateToProps = (state, ownProps) => ({
   errors: state.errors.session
@@ -58,7 +59,7 @@ class Login extends React.Component {
     let errorsArr = [];
     Object.values(this.props.errors).forEach((err, i) => {
       errorsArr.push(
-        <li key={`error-${i}`}>{err}</li>
+        <p className="login-error" key={`error-${i}`}>{err}</p>
       )
     })
 
@@ -67,44 +68,73 @@ class Login extends React.Component {
     }
 
     return (
-      <div>
-        <div>
-          <h1>Welcome Back</h1>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              placeholder="email address"
-              className="login-input-field"
-              value={this.state.email}
-              onChange={this.update('email')}
-            />
-            <input
-              type="password"
-              placeholder="password"
-              className="login-input-field"
-              value={this.state.password}
-              onChange={this.update('password')}
-            />
-            <input
-              type="submit"
-              value="Get Started"
-              className="signup-input-field signup-submit"
-            />
-          </form>
-          <GoogleLogin
-            clientId="590527218773-92a9untpqntbcajbpab9eju8gql06m2c.apps.googleusercontent.com"
-            buttonText="Login with Google"
-            onSuccess={this.responseSuccessGoogle}
-            onFailure={responseErrorGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
-          <FacebookLogin
-            appId="1115979958774257"
-            autoLoad={false}
-            fields="name,email,picture"
-            callback={this.responseFacebook} />
-          <ul>{errorsArr}</ul>
-          <Link to="/">Back to Splash Page</Link>
+      <div className="login-component-container">
+        <div className="welcome-background-img">
+        </div>
+        <div className="login-container">
+          <div>
+            <h1>Welcome Back</h1>
+            <form 
+              className="login-form-container"
+              onSubmit={this.handleSubmit}
+            >
+              <input
+                type="text"
+                placeholder="email address"
+                className="login-input-field"
+                value={this.state.email}
+                onChange={this.update('email')}
+              />
+              <input
+                type="password"
+                placeholder="password"
+                className="login-input-field"
+                value={this.state.password}
+                onChange={this.update('password')}
+              />
+              <input
+                type="submit"
+                value="Get Started"
+                className="signup-input-field signup-submit"
+              />
+              <div className="oauth-login-container">
+                <GoogleLogin
+                  clientId="590527218773-92a9untpqntbcajbpab9eju8gql06m2c.apps.googleusercontent.com"
+                  buttonText="Login with Google"
+                  onSuccess={this.responseSuccessGoogle}
+                  onFailure={responseErrorGoogle}
+                  cookiePolicy={'single_host_origin'}
+                  render={renderProps => (
+                    <button
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      className="oauth-signup google-signup"
+                    >Google Credentials</button>
+                  )}
+                />
+                <FacebookLogin
+                  appId="1115979958774257"
+                  autoLoad={false}
+                  fields="name,email,picture"
+                  callback={this.responseFacebook} 
+                  render={renderProps => (
+                    <button
+                      className="oauth-signup facebook-signup"
+                      onClick={renderProps.onClick}
+                    >Facebook Credentials</button>
+                  )}
+                />
+              </div>
+            </form>
+            <Link 
+              to="/"
+              className="link-to-splash"
+            >Back to Splash Page</Link>
+            <div className="login-errors">
+              {errorsArr}
+              <p className="clear-element">y</p>
+            </div>
+          </div>
         </div>
       </div>
     );
