@@ -5,7 +5,35 @@
   padding: 20px;
 }
 
-.splash-background-container {
+.splash-title {
+  color: #800000;
+}
+
+.splash-navigation-session {
+  margin: 0 15px 0 15px;
+  display: inline-flex;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 44px;
+  min-width: 76px;
+  color: white;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.signup-link {
+  background-color: #FFA07A;
+}
+
+.login-link {
+  background-color: #B0C4DE;
+}
+
+.jumbotron-background-container {
   position: relative;
 }
 
@@ -15,6 +43,18 @@
   opacity: 0.5;
 }
 
-.splash-jumbotron-content {
+.jumbotron-container {
+  z-index: 1;
   position: absolute;
+  height: 950px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.jumbotron-header {
+  font-size: 62px;
+  font-weight: bold;
 }

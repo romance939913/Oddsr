@@ -115,6 +115,7 @@ class Signup extends React.Component {
         <GoogleLogin
           clientId="590527218773-92a9untpqntbcajbpab9eju8gql06m2c.apps.googleusercontent.com"
           buttonText="Use Google Credentials"
+          className="google-signup"
           onSuccess={this.responseSuccessGoogle}
           onFailure={responseErrorGoogle}
           cookiePolicy={'single_host_origin'}
@@ -122,6 +123,8 @@ class Signup extends React.Component {
         <FacebookLogin
           appId="1115979958774257"
           autoLoad={false}
+          textButton="Use Facebook Credentials"
+          className="facebook-signup"
           fields="name,email,picture"
           callback={this.responseFacebook} 
         />
