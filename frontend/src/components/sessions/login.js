@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
 import { Link } from 'react-router-dom';
 import { login, clearSessionErrors } from '../../actions/session_actions';
 
@@ -44,10 +43,6 @@ class Login extends React.Component {
         <li key={`error-${i}`}>{err}</li>
       )
     })
-
-    const responseFacebook = (response) => {
-      console.log(response);
-    }
     
     const responseSuccessGoogle = (response) => {
       let user = {
@@ -70,14 +65,14 @@ class Login extends React.Component {
             <input
               type="text"
               placeholder="email address"
-              className="signup-input-field"
+              className="login-input-field"
               value={this.state.email}
               onChange={this.update('email')}
             />
             <input
               type="password"
               placeholder="password"
-              className="signup-input-field"
+              className="login-input-field"
               value={this.state.password}
               onChange={this.update('password')}
             />
@@ -94,12 +89,6 @@ class Login extends React.Component {
             onFailure={responseErrorGoogle}
             cookiePolicy={'single_host_origin'}
           />
-          <FacebookLogin
-            appId="1088597931155576"
-            autoLoad={true}
-            fields="name,email,picture"
-            onClick={componentClicked}
-            callback={responseFacebook} />
           <ul>{errorsArr}</ul>
           <Link to="/">Back to Splash Page</Link>
         </div>
