@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { fetchCappers } from '../../actions/capper_actions'
 import { logout } from '../../actions/session_actions';
 import RingLoader from "react-spinners/RingLoader";
-import './feed.css';
+import './leaderboard.css';
+
+import Nav from '../nav/nav';
 
 const mapStateToProps = (state, ownProps) => ({
   history: ownProps.history,
@@ -20,6 +22,9 @@ const mapDispatchToProps = dispatch => ({
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      selected: 1
+    }
     this.handleLogout = this.handleLogout.bind(this);
   }
 
@@ -29,6 +34,11 @@ class Leaderboard extends React.Component {
 
   handleLogout() {
     this.props.logout();
+  }
+
+  selectCapper(capper) {
+    console.log(capper)
+    debugger
   }
 
   render() {
@@ -44,21 +54,30 @@ class Leaderboard extends React.Component {
     }
 
     let cappersArr = [];
-    this.props.cappers.forEach(capper => {
+    this.props.cappers.forEach((capper, i) => {
       cappersArr.push(
-        <ul>
-          <li>{capper.username}</li>
-          <li>record: {capper.wins} - {capper.losses}</li>
+        <ul 
+          className="leaderboard-capper-container" 
+          key={`capper-${capper.username}}`}
+          onClick={(pojo) => this.selectCapper(pojo)}
+        >
+          <li className="capper-list-item">{capper.username}</li>
+          <li className="capper-list-item">Record: {capper.wins} - {capper.losses} - {capper.pushes}</li>
+          <li className="capper-list-item">Bio: {capper.bio}</li>
         </ul>
       )
     })
 
     return (
-      <div>
-        <h1>Oddsr Leaderboard</h1>
-        <a className="nav-logout" onClick={this.handleLogout}>Logout</a>
-        <div>
-          {cappersArr}
+      <div className="leaderboard-component-conteiner">
+        <Nav />
+        <div className="leaderboard-container">
+          <div className="capper-list-container">
+            {cappersArr}
+          </div>
+          <div className="selected-capper-container">
+            
+          </div>
         </div>
       </div>
     );

@@ -14,12 +14,23 @@ const CapperSchema = new Schema({
     type: String,
     required: true
   },
+  bio: {
+    type: String,
+  },
+  sports: {
+    type: String
+  },
   wins: {
     type: Number,
     required: true,
     default: 0
   },
   losses: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  pushes: {
     type: Number,
     required: true,
     default: 0

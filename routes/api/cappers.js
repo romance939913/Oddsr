@@ -47,7 +47,9 @@ router.post("/register", (req, res) => {
         const newCapper = new Capper({
           username: req.body.username,
           email: req.body.email,
-          password: req.body.password
+          password: req.body.password,
+          bio: req.body.bio,
+          sports: req.body.sports
         })
 
         bcrypt.genSalt(10, (err, salt) => {

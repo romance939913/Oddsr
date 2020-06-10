@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Splash from './splash/splash';
 import Login from './sessions/login';
-import Feed from './feed/feed';
+import Leaderboard from './leaderboard/leaderboard';
 import Signup from './sessions/signup';
 
 const App = () => (
@@ -13,7 +13,7 @@ const App = () => (
       <AuthRoute exact path="/" component={Splash}/>
       <AuthRoute exact path="/login" component={Login} />
       <AuthRoute exact path="/signup" component={Signup} />
-      <ProtectedRoute exact path="/feed" component={Feed}/>
+      <ProtectedRoute exact path="/Leaderboard" component={Leaderboard}/>
     </Switch>
   </div>
 );
