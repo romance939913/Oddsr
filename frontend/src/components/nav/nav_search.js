@@ -7,6 +7,11 @@ class NavSearch extends React.Component {
     this.state ={
       query: ""
     }
+    this.handleInput = this.handleInput.bind(this);
+  }
+
+  handleInput() {
+
   }
 
   render() {
@@ -18,6 +23,7 @@ class NavSearch extends React.Component {
           placeholder="Search Cappers"
           className="nav-search-field"
           value={this.state.query}
+          onChange={this.handleInput}
         />
       </form>
     )

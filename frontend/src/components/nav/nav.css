@@ -5,9 +5,6 @@
   padding: 20px;
 }
 
-.leaderboard-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.nav-logout {
+  cursor: pointer;
 }

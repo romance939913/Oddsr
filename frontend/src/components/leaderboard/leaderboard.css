@@ -1,8 +1,3 @@
-.nav-logout {
-  color: green;
-  cursor: pointer;
-}
-
 .sweet-loading {
   height: 100vh;
   width: 100vw;
@@ -11,21 +6,21 @@
   align-items: center;
 }
 
-.leaderboard-container {
-
-}
-
 .capper-list-container {
   width: 30vw;
 }
 
 .leaderboard-capper-container {
   border: 1px solid black;
-  width: 100%;
   padding: 10px;
   cursor: pointer;
 }
 
 .capper-list-item {
   list-style: none;
+}
+
+.leaderboard-container {
+  display: flex;
+  justify-content: center;
 }

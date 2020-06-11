@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { fetchCappers } from '../../actions/capper_actions'
+import { fetchCappers, receiveCapper } from '../../actions/capper_actions'
 import { logout } from '../../actions/session_actions';
 import RingLoader from "react-spinners/RingLoader";
 import './leaderboard.css';
 
 import Nav from '../nav/nav';
+import SelectCapper from './selectedCapper';
 
 const mapStateToProps = (state, ownProps) => ({
   history: ownProps.history,
@@ -16,16 +17,16 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  fetchCappers: () => dispatch(fetchCappers())
+  fetchCappers: () => dispatch(fetchCappers()),
+  receiveCapper: (capper) => dispatch(receiveCapper(capper)),
 })
 
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      selected: 1
-    }
     this.handleLogout = this.handleLogout.bind(this);
+    this.selectCapper = this.selectCapper.bind(this);
+    this.createLeaderboard = this.createLeaderboard.bind(this);
   }
 
   componentDidMount() {
@@ -36,9 +37,28 @@ class Leaderboard extends React.Component {
     this.props.logout();
   }
 
-  selectCapper(capper) {
-    console.log(capper)
-    debugger
+  createLeaderboard() {
+    let arr = [];
+    Object.values(this.props.cappers).forEach((capper, idx) => {
+      arr.push(
+        <ul
+          className="leaderboard-capper-container"
+          id={`${capper._id}`}
+          key={`capper-${idx}`}
+          onClick={this.selectCapper}
+        >
+          <li className="capper-list-item">{capper.username}</li>
+          <li className="capper-list-item">Record: {capper.wins} - {capper.losses} - {capper.pushes}</li>
+          <li className="capper-list-item">Bio: {capper.bio}</li>
+        </ul>
+      )
+    })
+    return arr;
+  }
+
+  selectCapper(e) {
+    let selectedCapper = this.props.cappers[e.currentTarget.id];
+    this.props.receiveCapper(selectedCapper);
   }
 
   render() {
@@ -53,20 +73,7 @@ class Leaderboard extends React.Component {
       )
     }
 
-    let cappersArr = [];
-    this.props.cappers.forEach((capper, i) => {
-      cappersArr.push(
-        <ul 
-          className="leaderboard-capper-container" 
-          key={`capper-${capper.username}}`}
-          onClick={(pojo) => this.selectCapper(pojo)}
-        >
-          <li className="capper-list-item">{capper.username}</li>
-          <li className="capper-list-item">Record: {capper.wins} - {capper.losses} - {capper.pushes}</li>
-          <li className="capper-list-item">Bio: {capper.bio}</li>
-        </ul>
-      )
-    })
+    let cappersArr = this.createLeaderboard();
 
     return (
       <div className="leaderboard-component-conteiner">
@@ -76,7 +83,7 @@ class Leaderboard extends React.Component {
             {cappersArr}
           </div>
           <div className="selected-capper-container">
-            
+            <SelectCapper />
           </div>
         </div>
       </div>
