@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { clearCapper } from '../../actions/capper_actions'
+import { clearCapper } from '../../actions/capper_actions';
+import './selectedCapper.css';
 
 const mapStateToProps = (state, ownProps) => ({
   capper: state.entities.capper
@@ -19,7 +20,16 @@ class SelectedCapper extends React.Component {
     if (this.props.capper.length === 0) return null;
 
     return (
-      <p>Hi</p>
+      <div className="selected-capper-component-container">
+        <p>{this.props.capper.username}</p>
+        <p>{this.props.capper.bio}</p>
+        <p>sports: {`${this.props.capper.sports}`}</p>
+        <p>recors: {this.props.capper.wins}-
+          {this.props.capper.losses}-
+          {this.props.capper.pushes}
+        </p>
+        
+      </div>
     )
   }
 }

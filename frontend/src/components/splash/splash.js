@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './splash.css'
+import SplashBody from './splashBody';
+import './splash.css';
 
-class MainPage extends React.Component {
+class Splash extends React.Component {
 
   render() {
     return (
@@ -12,10 +13,12 @@ class MainPage extends React.Component {
           <div className="splash-session-links">
             <Link
               className="splash-navigation-session login-link"
-              to="/login">Login</Link>
+              to="/login">Login
+            </Link>
             <Link
               className="splash-navigation-session signup-link"
-              to="/signup">Sign Up</Link>
+              to="/signup">Sign Up
+            </Link>
           </div>
         </div>
         <div className="jumbotron-background-container">
@@ -24,10 +27,11 @@ class MainPage extends React.Component {
           </div>
           <div className="splash-jumbotron-background">
           </div>
+          <SplashBody />
         </div>
       </div>
     );
   }
 }
 
-export default MainPage;
+export default Splash;

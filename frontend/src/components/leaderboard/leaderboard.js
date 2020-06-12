@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { fetchCappers, receiveCapper } from '../../actions/capper_actions'
+import { fetchCappers, 
+  receiveCapper,
+  clearCapper } from '../../actions/capper_actions'
 import { logout } from '../../actions/session_actions';
 import RingLoader from "react-spinners/RingLoader";
 import './leaderboard.css';
@@ -19,6 +21,7 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
   fetchCappers: () => dispatch(fetchCappers()),
   receiveCapper: (capper) => dispatch(receiveCapper(capper)),
+  clearCapper: () => dispatch(clearCapper())
 })
 
 class Leaderboard extends React.Component {
@@ -31,6 +34,7 @@ class Leaderboard extends React.Component {
 
   componentDidMount() {
     this.props.fetchCappers();
+    this.props.clearCapper();
   }
 
   handleLogout() {
@@ -82,7 +86,7 @@ class Leaderboard extends React.Component {
           <div className="capper-list-container">
             {cappersArr}
           </div>
-          <div className="selected-capper-container">
+          <div className="leaderboard-side-profile">
             <SelectCapper />
           </div>
         </div>

@@ -1,0 +1,9 @@
+.capper-login-input-field {
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  min-width: 480px;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 15px 20px 15px 20px;
+  outline: none;
+}

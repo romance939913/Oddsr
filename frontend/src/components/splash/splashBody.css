@@ -1,0 +1,39 @@
+.capper-session-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 20vh;
+}
+.capper-session-header-container {
+  width: 25vw;
+}
+
+
+.capper-session-header {
+  font-size: 45px;
+}
+
+.splash-capper-session {
+  margin: 0 15px 0 15px;
+  display: inline-flex;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 44px;
+  min-width: 76px;
+  color: white;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.capper-signup-link {
+  background-color: #006400;
+}
+
+.capper-login-link {
+  background-color: #191970;
+}

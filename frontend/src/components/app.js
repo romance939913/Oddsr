@@ -3,9 +3,10 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import { Switch, Route } from 'react-router-dom';
 
 import Splash from './splash/splash';
-import Login from './sessions/login';
+import Login from './userSessions/login';
 import Leaderboard from './leaderboard/leaderboard';
-import Signup from './sessions/signup';
+import Signup from './userSessions/signup';
+import CapperLogin from './capperSessions/login';
 
 const App = () => (
   <div>
@@ -13,6 +14,8 @@ const App = () => (
       <AuthRoute exact path="/" component={Splash}/>
       <AuthRoute exact path="/login" component={Login} />
       <AuthRoute exact path="/signup" component={Signup} />
+      <AuthRoute exact path="/capper/login" component={CapperLogin} />
+      <AuthRoute exact path="/capper/signup" component={Signup} />
       <ProtectedRoute exact path="/Leaderboard" component={Leaderboard}/>
     </Switch>
   </div>
