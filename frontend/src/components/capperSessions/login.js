@@ -41,7 +41,7 @@ class CapperLogin extends React.Component {
 
     return (
       <div className="capper-login-component-container">
-
+        <p>Larry Fitz</p>
       </div>
     );
   }
