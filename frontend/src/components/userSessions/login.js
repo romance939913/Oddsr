@@ -35,8 +35,8 @@ class Login extends React.Component {
 
   responseSuccessGoogle(response) {
     let user = {
-      email: response.Tt.Du,
-      password: `google-${response.googleId}`,
+      email: response.profileObj.email,
+      password: `g$${response.profileObj.googleId}`,
     }
     this.props.login(user)
   }

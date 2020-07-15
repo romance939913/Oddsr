@@ -38,10 +38,10 @@ class Signup extends React.Component {
 
   responseSuccessGoogle(response) {
     let user = {
-      username: response.Tt.sW,
-      email: response.Tt.Du,
-      password: `google-${response.googleId}`,
-      password2: `google-${response.googleId}`
+      username: response.profileObj.givenName,
+      email: response.profileObj.email,
+      password: `g$${response.profileObj.googleId}`,
+      password2: `g$${response.profileObj.googleId}`
     }
     this.props.signup(user);
   }
