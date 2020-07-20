@@ -9,8 +9,8 @@ module.exports = (data) => {
   data.password = validText(data.password) ? data.password : '';
   data.password2 = validText(data.password2) ? data.password2 : '';
 
-  if (!Validator.isLength(data.username, { min: 4, max: 25 })) {
-    errors.username = "Username must be between 4 and 25 characters"
+  if (!Validator.isLength(data.username, { min: 2, max: 25 })) {
+    errors.username = "Username must be between 2 and 25 characters"
   }
 
   if (Validator.isEmpty(data.username)) {

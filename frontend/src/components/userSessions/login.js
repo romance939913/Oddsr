@@ -95,37 +95,37 @@ class Login extends React.Component {
               <input
                 type="submit"
                 value="Get Started"
-                className="signup-input-field signup-submit"
+                className="login-input-field signup-submit"
               />
-              <div className="oauth-login-container">
-                <GoogleLogin
-                  clientId="590527218773-92a9untpqntbcajbpab9eju8gql06m2c.apps.googleusercontent.com"
-                  buttonText="Login with Google"
-                  onSuccess={this.responseSuccessGoogle}
-                  onFailure={responseErrorGoogle}
-                  cookiePolicy={'single_host_origin'}
-                  render={renderProps => (
-                    <button
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                      className="oauth-signup google-signup"
-                    >Google Credentials</button>
-                  )}
-                />
-                <FacebookLogin
-                  appId="1115979958774257"
-                  autoLoad={false}
-                  fields="name,email,picture"
-                  callback={this.responseFacebook} 
-                  render={renderProps => (
-                    <button
-                      className="oauth-signup facebook-signup"
-                      onClick={renderProps.onClick}
-                    >Facebook Credentials</button>
-                  )}
-                />
-              </div>
             </form>
+            <div className="oauth-login-container">
+              <GoogleLogin
+                clientId="590527218773-92a9untpqntbcajbpab9eju8gql06m2c.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                onSuccess={this.responseSuccessGoogle}
+                onFailure={responseErrorGoogle}
+                cookiePolicy={'single_host_origin'}
+                render={renderProps => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    className="oauth-signup google-signup"
+                  >Google Credentials</button>
+                )}
+              />
+              <FacebookLogin
+                appId="1115979958774257"
+                autoLoad={false}
+                fields="name,email,picture"
+                callback={this.responseFacebook}
+                render={renderProps => (
+                  <button
+                    className="oauth-signup facebook-signup"
+                    onClick={renderProps.onClick}
+                  >Facebook Credentials</button>
+                )}
+              />
+            </div>
             <Link 
               to="/"
               className="link-to-splash"
