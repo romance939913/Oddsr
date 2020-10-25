@@ -35,6 +35,7 @@ const CapperSchema = new Schema({
     required: true,
     default: 0
   },
+  picks: [],
   date: {
     type: Date,
     default: Date.now
