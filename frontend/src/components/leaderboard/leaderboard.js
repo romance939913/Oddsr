@@ -3,31 +3,15 @@ import { connect } from "react-redux";
 import { fetchCappers, 
   receiveCapper,
   clearCapper } from '../../actions/capper_actions'
-import { logout } from '../../actions/session_actions';
 import RingLoader from "react-spinners/RingLoader";
 import './leaderboard.css';
 
 import Nav from '../nav/nav';
 import SelectCapper from './selectedCapper';
 
-const mapStateToProps = (state, ownProps) => ({
-  history: ownProps.history,
-  loggedIn: state.session.isAuthenticated,
-  username: state.session.user.username,
-  cappers: state.entities.cappers
-});
-
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout()),
-  fetchCappers: () => dispatch(fetchCappers()),
-  receiveCapper: (capper) => dispatch(receiveCapper(capper)),
-  clearCapper: () => dispatch(clearCapper())
-})
-
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props)
-    this.handleLogout = this.handleLogout.bind(this);
     this.selectCapper = this.selectCapper.bind(this);
     this.createLeaderboard = this.createLeaderboard.bind(this);
   }
@@ -35,10 +19,6 @@ class Leaderboard extends React.Component {
   componentDidMount() {
     this.props.fetchCappers();
     this.props.clearCapper();
-  }
-
-  handleLogout() {
-    this.props.logout();
   }
 
   createLeaderboard() {
@@ -62,7 +42,11 @@ class Leaderboard extends React.Component {
 
   selectCapper(e) {
     let selectedCapper = this.props.cappers[e.currentTarget.id];
-    this.props.receiveCapper(selectedCapper);
+    if (this.props.capper._id === selectedCapper._id) {
+      this.props.clearCapper()
+    } else {
+      this.props.receiveCapper(selectedCapper);
+    }
   }
 
   render() {
@@ -94,5 +78,19 @@ class Leaderboard extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  history: ownProps.history,
+  loggedIn: state.session.isAuthenticated,
+  username: state.session.user.username,
+  cappers: state.entities.cappers,
+  capper: state.entities.capper
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchCappers: () => dispatch(fetchCappers()),
+  receiveCapper: (capper) => dispatch(receiveCapper(capper)),
+  clearCapper: () => dispatch(clearCapper())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Leaderboard);

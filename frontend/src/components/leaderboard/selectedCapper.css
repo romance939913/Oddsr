@@ -6,3 +6,8 @@
   padding: 10px;
 }
 
+.selected-capper-pick {
+  border: solid black 1px;
+  padding: 5px;
+  margin: 5px;
+}
