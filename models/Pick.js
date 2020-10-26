@@ -14,6 +14,11 @@ const PickSchema = new Schema({
         type: Number,
         required: true
     },
+    Outcome: {
+        type: String,
+        required: true,
+        default: "Pending"
+    },
     date: {
         type: Date,
         default: Date.now

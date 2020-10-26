@@ -58,7 +58,26 @@ router.post("/register", (req, res) => {
             newCapper.password = hash
             newCapper
               .save()
-              .then(user => res.json(user))
+              .then(capper => {
+                const payload = {
+                  id: capper.id,
+                  username: capper.username,
+                  email: capper.email,
+                  bio: capper.bio,
+                  sports: capper.sports
+                }
+                jwt.sign(
+                  payload,
+                  keys.secretOrKey,
+                  { expiresIn: 3600 },
+                  (err, token) => {
+                    res.json({
+                      success: true,
+                      type: "capper",
+                      token: "Bearer " + token
+                    });
+                  })
+              })
               .catch(err => console.log(err))
           })
         })
@@ -89,7 +108,6 @@ router.post("/login", (req, res) => {
               id: capper.id,
               username: capper.username,
               email: capper.email,
-              type: 'capper'
             }
             jwt.sign(
               payload,
@@ -98,6 +116,7 @@ router.post("/login", (req, res) => {
               (err, token) => {
                 res.json({
                   success: true,
+                  type: 'capper',
                   token: "Bearer " + token
                 });
               })
