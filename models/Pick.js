@@ -2,16 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const PickSchema = new Schema({
-    betId: {
-        type: String,
-        required: true
-    },
-    teams: {
+    team: {
         type: String,
         required: true
     },
     spread: {
-        type: Number,
+        type: String,
         required: true
     },
     units: {

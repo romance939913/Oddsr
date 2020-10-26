@@ -4,6 +4,7 @@ const db = require("./config/keys").mongoURI;
 const app = express();
 const users = require("./routes/api/users");
 const cappers = require("./routes/api/cappers");
+const picks = require("./routes/api/picks");
 const images = require('./routes/api/images');
 const bodyparser = require("body-parser");
 const passport = require('passport');
@@ -20,6 +21,7 @@ app.use(bodyparser.json());
 app.use("/api/users", users);
 app.use("/api/cappers", cappers);
 app.use("/api/images", images);
+app.use("/api/picks", picks);
 
 mongoose
   .connect(db, { useNewUrlParser: true })
