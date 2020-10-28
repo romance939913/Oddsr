@@ -6,6 +6,11 @@ const CapperSchema = new Schema({
     type: String,
     required: true
   },
+  userType: {
+    type: String,
+    required: true,
+    default: 'capper'
+  },
   email: {
     type: String,
     required: true

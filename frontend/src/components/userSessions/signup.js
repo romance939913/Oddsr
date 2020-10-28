@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { Link } from 'react-router-dom';
-import { signup, clearSessionErrors } from '../../actions/session_actions';
+import { userSignup, clearSessionErrors } from '../../actions/session_actions';
 import './signup.css';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  signup: (user) => dispatch(signup(user)),
+  signup: (user) => dispatch(userSignup(user)),
   clearSignupErrors: () => dispatch(clearSessionErrors())
 })
 
