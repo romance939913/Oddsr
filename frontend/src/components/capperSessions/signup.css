@@ -1,0 +1,121 @@
+.signup-component-container {
+    position: relative;
+  }
+  
+  .signup-container {
+    z-index: 1;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signup-background-img {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("./superbowl.jpg");
+    background-size: cover;
+    opacity: 0.7;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .signup-title-container {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    margin: 15px 0 15px 0;
+  }
+  
+  .signup-input-field {
+    width: 100%;
+    min-width: 450px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid black;
+    padding: 15px 20px 15px 20px;
+    outline: none;
+  }
+  
+  .signup-input-field:focus {
+    border: 1px solid red;
+  }
+  
+  .signup-input-field:hover {
+    border: 1px solid red;
+  }
+  
+  .oauth-signup-container {
+    width: 100%;
+    min-width: 450px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .oauth-signup {
+    width: 49%;
+    padding: 15px 20px 15px 20px;
+  }
+  
+  .oauth-signup:hover {
+    border: 1px solid red;
+  }
+  
+  .oauth-signup:focus {
+    border: 1px solid red;
+  }
+  
+  .facebook-signup {
+    background-color: #3b5998;
+    color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .google-signup {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .route-to-login {
+    color: black;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .signup-errors-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+  }
+  
+  .signup-error {
+    color: black;
+    padding: 0px 10px 0px 10px;
+  }
+  
+  .clear-element {
+    opacity: 0.0;
+  }
+  
+  @media only screen and (max-width: 1500px) {
+    .signup-title-container {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+  }

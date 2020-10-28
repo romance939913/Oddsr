@@ -112,10 +112,10 @@
 }
 
 @media only screen and (max-width: 1500px) {
-.signup-title-container {
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
+  .signup-title-container {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
 }

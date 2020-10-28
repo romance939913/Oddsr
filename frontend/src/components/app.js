@@ -7,6 +7,7 @@ import Login from './userSessions/login';
 import Leaderboard from './leaderboard/leaderboard';
 import Signup from './userSessions/signup';
 import CapperLogin from './capperSessions/login';
+import CapperSignup from './capperSessions/signup';
 
 const App = () => (
   <div>
@@ -15,7 +16,7 @@ const App = () => (
       <AuthRoute exact path="/login" component={Login} />
       <AuthRoute exact path="/signup" component={Signup} />
       <AuthRoute exact path="/capper/login" component={CapperLogin} />
-      <AuthRoute exact path="/capper/signup" component={Signup} />
+      <AuthRoute exact path="/capper/signup" component={CapperSignup} />
       <ProtectedRoute exact path="/Leaderboard" component={Leaderboard}/>
     </Switch>
   </div>
