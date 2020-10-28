@@ -73,7 +73,6 @@ router.post("/register", (req, res) => {
                   (err, token) => {
                     res.json({
                       success: true,
-                      type: "capper",
                       token: "Bearer " + token
                     });
                   })
@@ -116,7 +115,6 @@ router.post("/login", (req, res) => {
               (err, token) => {
                 res.json({
                   success: true,
-                  type: 'capper',
                   token: "Bearer " + token
                 });
               })

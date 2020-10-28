@@ -29,7 +29,7 @@ const Protected = ({ component: Component, loggedIn, ...rest }) => (
 const mapStateToProps = state => (
   { 
     loggedIn: state.session.isAuthenticated,
-    isCapper: false
+    type: state.session.userType
   }
 );
 

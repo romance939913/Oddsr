@@ -47,7 +47,6 @@ router.post("/register", (req, res) => {
                   (err, token) => {
                     res.json({
                       success: true,
-                      type: "user",
                       token: "Bearer " + token
                     });
                   })
@@ -81,6 +80,7 @@ router.post("/login", (req, res) => {
               id: user.id,
               username: user.username,
               email: user.email,
+              type: user.userType
             }
             jwt.sign(
               payload, 
@@ -89,7 +89,6 @@ router.post("/login", (req, res) => {
               (err, token) => {
                 res.json({
                   success: true,
-                  type: "user",
                   token: "Bearer " + token
                 });
               })
