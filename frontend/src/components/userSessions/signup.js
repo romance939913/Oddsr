@@ -146,7 +146,7 @@ class Signup extends React.Component {
               />
             </div>
           </form>
-          <Link className="route-to-login" to="/login">Already a user? Login here</Link>
+          <Link className="route-to-login" to="/user/login/">Already a user? Login here</Link>
           <div className="signup-errors-container">
             <p className="clear-element">y</p>
             {errorsArr}

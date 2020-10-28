@@ -13,11 +13,11 @@ class Splash extends React.Component {
           <div className="splash-session-links">
             <Link
               className="splash-navigation-session login-link"
-              to="/login">Login
+              to="/user/login">Login
             </Link>
             <Link
               className="splash-navigation-session signup-link"
-              to="/signup">Sign Up
+              to="/user/signup">Sign Up
             </Link>
           </div>
         </div>

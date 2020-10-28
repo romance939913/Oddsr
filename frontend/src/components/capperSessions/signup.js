@@ -76,7 +76,7 @@ class CapperSignup extends React.Component {
 
     return (
       <div className="signup-component-container">
-        <div className="signup-background-img">
+        <div className="signup-background-img-capper">
         </div>
         <div className="signup-container">
           <div className="signup-title-container">
@@ -146,7 +146,7 @@ class CapperSignup extends React.Component {
               />
             </div>
           </form>
-          <Link className="route-to-login" to="/login">Already a user? Login here</Link>
+          <Link className="route-to-login" to="/capper/login">Already a user? Login here</Link>
           <div className="signup-errors-container">
             <p className="clear-element">y</p>
             {errorsArr}

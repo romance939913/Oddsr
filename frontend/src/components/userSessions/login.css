@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.welcome-background-img {
+.welcome-background-img-user {
   background-image: url("./welcome.jpg");
   width: 50vw;
   height: 100vh;

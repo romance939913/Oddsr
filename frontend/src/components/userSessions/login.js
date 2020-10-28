@@ -69,7 +69,7 @@ class Login extends React.Component {
 
     return (
       <div className="login-component-container">
-        <div className="welcome-background-img">
+        <div className="welcome-background-img-user">
         </div>
         <div className="login-container">
           <div>
