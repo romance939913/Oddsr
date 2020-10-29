@@ -10,7 +10,7 @@ import './index.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
-
+  // delete localStorage.jwtToken;
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decodedUser = jwt_decode(localStorage.jwtToken);

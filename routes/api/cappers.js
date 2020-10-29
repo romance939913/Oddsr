@@ -64,7 +64,8 @@ router.post("/register", (req, res) => {
                   username: capper.username,
                   email: capper.email,
                   bio: capper.bio,
-                  sports: capper.sports
+                  sports: capper.sports,
+                  type: capper.userType
                 }
                 jwt.sign(
                   payload,
@@ -107,6 +108,9 @@ router.post("/login", (req, res) => {
               id: capper.id,
               username: capper.username,
               email: capper.email,
+              bio: capper.bio,
+              sports: capper.sports,
+              type: capper.userType
             }
             jwt.sign(
               payload,
