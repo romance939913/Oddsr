@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { logout } from '../../actions/session_actions';
+import { Link } from 'react-router-dom';
 import NavSearch from './nav_search';
 import './nav.css';
 
@@ -29,7 +30,9 @@ class Nav extends React.Component {
 
     return (
       <div className="nav-component-container">
-        <h1>Oddsr</h1>
+        <Link
+          to="/leaderboard">Oddsr
+        </Link>
         <div>
           <NavSearch />
         </div>

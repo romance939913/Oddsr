@@ -39,6 +39,7 @@ router.post("/register", (req, res) => {
                   id: user.id,
                   username: user.username,
                   email: user.email,
+                  type: user.userType
                 }
                 jwt.sign(
                   payload,

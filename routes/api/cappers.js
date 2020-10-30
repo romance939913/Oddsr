@@ -113,8 +113,8 @@ router.post("/login", (req, res) => {
               type: capper.userType
             }
             jwt.sign(
-              payload,
-              keys.secretOrKey,
+              payload, 
+              keys.secretOrKey, 
               { expiresIn: 3600 },
               (err, token) => {
                 res.json({

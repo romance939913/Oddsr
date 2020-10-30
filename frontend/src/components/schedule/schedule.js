@@ -39,7 +39,7 @@ class Schedule extends React.Component {
 
     const spreadsArray = [];
     if (this.props.spreads[this.state.sport]) {
-      this.props.spreads[this.state.sport].forEach(game => {
+      this.props.spreads[this.state.sport].forEach((game, idx) => {
         let spreadTeam0
         let spreadTeam1
         let site1 = 'not available'
@@ -49,7 +49,7 @@ class Schedule extends React.Component {
           site1 = game.sites[0].site_key;
         }
         spreadsArray.push(
-          <div className="array-spread-box">
+          <div className="array-spread-box" key={idx}>
             <p>{site1}</p>
             <div className="schedule-teams-array">
               <p>{game.teams[0]} {spreadTeam0} vs. </p>
