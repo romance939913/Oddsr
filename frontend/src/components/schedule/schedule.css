@@ -1,0 +1,15 @@
+.schedule-teams-array {
+    display: flex;
+}
+
+.array-spread-box {
+    margin: 5px;
+    padding: 5px;
+    border: black solid 1px;
+}
+
+.spreads {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
