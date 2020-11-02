@@ -5,7 +5,10 @@ const spreadsReducer = (state = {}, action) => {
   let nextState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_SPREADS:
-      nextState[action.spreads.data.data[0].sport_key] = action.spreads.data.data;
+      nextState[action.spreads.data.data[0].sport_key] = {};
+      action.spreads.data.data.forEach(game => {
+        nextState[action.spreads.data.data[0].sport_key][game.home_team] = game;
+      })
       return nextState
     default:
       return state;
