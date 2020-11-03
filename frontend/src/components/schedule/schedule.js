@@ -30,8 +30,12 @@ class Schedule extends React.Component {
   }
 
   selectThePick(e) {
-    let pick = this.props.spreads[this.state.sport][e.currentTarget.id]
-    this.props.selectPick(pick);
+    let pickHomeTeam = this.props.spreads[this.state.sport][e.currentTarget.id];
+    if (pickHomeTeam.home_team === this.props.pick.home_team) {
+      this.props.clearPick()
+    } else {
+      this.props.selectPick(pickHomeTeam);
+    }
   }
 
   render() {
@@ -102,7 +106,8 @@ const mapStateToProps = (state, ownProps) => ({
   history: ownProps.history,
   loggedIn: state.session.isAuthenticated,
   username: state.session.user.username,
-  spreads: state.entities.spreads
+  spreads: state.entities.spreads,
+  pick: state.entities.pick
 });
 
 const mapDispatchToProps = dispatch => ({
