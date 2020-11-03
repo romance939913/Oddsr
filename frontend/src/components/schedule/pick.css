@@ -1,0 +1,7 @@
+.selected-pick-container {
+    border: solid black 1px;
+}
+
+.selected-pick-teams-container {
+    display: flex;
+}

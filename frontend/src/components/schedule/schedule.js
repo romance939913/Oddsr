@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
+import Pick from './pick';
 import * as scheduleActions from '../../actions/schedule_actions';
 import * as pickActions from '../../actions/pick_actions';
 import RingLoader from "react-spinners/RingLoader";
@@ -22,13 +23,14 @@ class Schedule extends React.Component {
   }
 
   setSport(selectedSport) {
+    this.props.clearPick();
     this.setState({
       sport: selectedSport
     })
   }
 
   selectThePick(e) {
-    let pick = this.props.spreads[this.state.sport][e.target.id]
+    let pick = this.props.spreads[this.state.sport][e.currentTarget.id]
     this.props.selectPick(pick);
   }
 
@@ -56,17 +58,17 @@ class Schedule extends React.Component {
           site1 = game.sites[0].site_key;
         }
         spreadsArray.push(
-          <div className="array-spread-box" key={idx}>
+          <div 
+            className="array-spread-box" 
+            key={idx}
+            id={game.home_team}
+            onClick={(event) => this.selectThePick(event)}
+          >
             <p>{site1}</p>
             <div className="schedule-teams-array">
               <p>{game.teams[0]} {spreadTeam0} vs.</p>
               <p> {game.teams[1]} {spreadTeam1}</p>
             </div>
-            <p 
-              className="pick-see-more"
-              id={game.home_team}
-              onClick={(event) => this.selectThePick(event)}
-            >see more!</p>
           </div>
         )
       })
@@ -89,6 +91,7 @@ class Schedule extends React.Component {
           <div className="spreads">
             {spreadsArray}
           </div>
+          <Pick />
         </div>
       </div>
     );

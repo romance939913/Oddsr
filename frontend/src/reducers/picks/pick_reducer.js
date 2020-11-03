@@ -1,7 +1,7 @@
 import { RECEIVE_PICK,
           CLEAR_PICK } from '../../actions/pick_actions';
 
-const pickReducer = (state = {}, action) => {
+const pickReducer = (state = [], action) => {
   Object.freeze(state);
   let nextState = Object.assign({}, state);
   switch (action.type) {
