@@ -1,26 +1,3 @@
-.schedule-teams-array {
-    display: flex;
-}
-
-.array-spread-box {
-    margin-bottom: 5px;
-    width: 100%;
-    padding: 5px;
-    box-sizing: border-box;
-    border: black solid 1px;
-    cursor: pointer;
-}
-
-.array-spread-box:hover {
-    border: red solid 1px;
-}
-
-.spreads {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-}
-
 .schedule-sport-select {
     cursor: pointer;
     font-size: large;
@@ -36,11 +13,22 @@
     justify-content: space-evenly;
 }
 
-.spreads-picks-container {
+.schedule-and-pick-container {
     display: flex;
     justify-content: center;
 }
 
-.pick-see-more {
+.schedule-game-container {
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
     cursor: pointer;
+}
+
+.schedule-game-container:hover {
+    border: 1px solid red;
+}
+
+.schedule-game-teamName-container {
+    display: flex;
 }

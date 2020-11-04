@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
 import Pick from './pick';
-import * as scheduleActions from '../../actions/schedule/schedule_actions';
 import * as nflActions from '../../actions/schedule/nfl_actions';
 import * as ncaaActions from '../../actions/schedule/ncaaf_actions';
 import * as pickActions from '../../actions/pick_actions';
@@ -13,7 +12,7 @@ class Schedule extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      sport: 'americanfootball_nfl',
+      sport: 'nfl',
     }
     this.setSport = this.setSport.bind(this);
     this.selectThePick = this.selectThePick.bind(this);
@@ -29,8 +28,6 @@ class Schedule extends React.Component {
       .then(week => {
         this.props.fetchOddsNCAAF(week.week.data)
       })
-    this.props.fetchSpreads('americanfootball_nfl');
-    this.props.fetchSpreads('americanfootball_ncaaf');
   }
 
   setSport(selectedSport) {
@@ -41,8 +38,8 @@ class Schedule extends React.Component {
   }
 
   selectThePick(e) {
-    let pickHomeTeam = this.props.spreads[this.state.sport][e.currentTarget.id];
-    if (pickHomeTeam.home_team === this.props.pick.home_team) {
+    let pickHomeTeam = this.props[this.state.sport].schedule[e.currentTarget.id];
+    if (pickHomeTeam.HomeTeamName === this.props.pick.HomeTeamName) {
       this.props.clearPick()
     } else {
       this.props.selectPick(pickHomeTeam);
@@ -50,44 +47,41 @@ class Schedule extends React.Component {
   }
 
   render() {
-    if (Object.keys(this.props.spreads) < 2) {
+    if (!this.props.nfl.schedule ||
+      !this.props.nfl.week ||
+      !this.props.ncaaf.week ||
+      !this.props.ncaaf.schedule) {
       return (
-        <div className="sweet-loading">
-          <RingLoader
-            size={150}
-            color={"#123abc"}
-          />
+        <div>
+          <Nav />
+          <div className="sweet-loading">
+            <RingLoader
+              size={150}
+              color={"#123abc"}
+            />
+          </div>
         </div>
       )
     }
 
-    const spreadsArray = [];
-    if (this.props.spreads[this.state.sport]) {
-      Object.values(this.props.spreads[this.state.sport]).forEach((game, idx) => {
-        let spreadTeam0
-        let spreadTeam1
-        let site1 = 'no books available'
-        if (!!game.sites[0]) {
-          spreadTeam0 = game.sites[0].odds.spreads.points[0];
-          spreadTeam1 = game.sites[0].odds.spreads.points[1];
-          site1 = game.sites[0].site_key;
-        }
-        spreadsArray.push(
-          <div 
-            className="array-spread-box" 
-            key={idx}
-            id={game.home_team}
-            onClick={(event) => this.selectThePick(event)}
-          >
-            <p>site: {site1}</p>
-            <div className="schedule-teams-array">
-              <p>{game.teams[0]} {spreadTeam0} vs.</p>
-              <p> {game.teams[1]} {spreadTeam1}</p>
-            </div>
+    let scheduleArray = [];
+    Object.values(this.props[this.state.sport].schedule).forEach((game, idx) => {
+      if (game.PregameOdds.length === 0) return;
+      if (!game.PregameOdds[0].SportsbookUrl) return;
+      scheduleArray.push(
+        <div 
+          className="schedule-game-container"
+          key={idx}
+          id={game.HomeTeamName}
+          onClick={this.selectThePick}
+        >
+          <div className="schedule-game-teamName-container">
+            <p>{game.HomeTeamName} vs.</p>
+            <p> {game.AwayTeamName}</p>
           </div>
-        )
-      })
-    }
+        </div>
+      )
+    })
 
     return (
       <div>
@@ -95,16 +89,16 @@ class Schedule extends React.Component {
         <div className="select-sport-container">
           <p 
             className="schedule-sport-select"
-            onClick={() => this.setSport('americanfootball_nfl')}
+            onClick={() => this.setSport('nfl')}
           >NFL</p>
           <p 
             className="schedule-sport-select"
-            onClick={() => this.setSport('americanfootball_ncaaf')}
+            onClick={() => this.setSport('ncaaf')}
           >NCAA Football</p>
         </div>
-        <div className="spreads-picks-container">
-          <div className="spreads">
-            {spreadsArray}
+        <div className="schedule-and-pick-container">
+          <div className="schedule-container">
+            {scheduleArray}
           </div>
           <Pick />
         </div>
@@ -117,12 +111,12 @@ const mapStateToProps = (state, ownProps) => ({
   history: ownProps.history,
   loggedIn: state.session.isAuthenticated,
   username: state.session.user.username,
-  spreads: state.entities.schedule.schedule,
+  nfl: state.entities.schedule.nfl,
+  ncaaf: state.entities.schedule.ncaaf,
   pick: state.entities.pick
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSpreads: (sport) => dispatch(scheduleActions.fetchSpreads(sport)),
   fetchOddsNFL: (week) => dispatch(nflActions.fetchOddsNFL(week)),
   fetchNFLWeek: () => dispatch(nflActions.fetchNFLWeek()),
   fetchOddsNCAAF: (week) => dispatch(ncaaActions.fetchOddsNCAAF(week)),
