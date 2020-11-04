@@ -1,7 +1,13 @@
 .selected-pick-container {
     border: solid black 1px;
+    margin: 5px;
 }
 
 .selected-pick-teams-container {
     display: flex;
+    padding: 5px;
+}
+
+.selected-pick-site-container {
+    padding: 5px;
 }

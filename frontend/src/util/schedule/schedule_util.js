@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as keys from './api_keys'
+import * as keys from '../api_keys'
 
 export const getTimes = () => {
   return axios.get('/api/cappers');

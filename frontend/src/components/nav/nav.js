@@ -31,6 +31,7 @@ class Nav extends React.Component {
     return (
       <div className="nav-component-container">
         <Link
+          className="oddsr-nav-logo"
           to="/leaderboard">Oddsr
         </Link>
         <div>

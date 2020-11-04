@@ -3,18 +3,22 @@
 }
 
 .array-spread-box {
-    margin: 5px;
-    padding: 5px;
-    border: black solid 1px;
+    margin-bottom: 5px;
     width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border: black solid 1px;
     cursor: pointer;
+}
+
+.array-spread-box:hover {
+    border: red solid 1px;
 }
 
 .spreads {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    margin: 5px;
 }
 
 .schedule-sport-select {

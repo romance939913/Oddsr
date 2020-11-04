@@ -5,6 +5,22 @@
   padding: 20px;
 }
 
+.oddsr-nav-logo {
+  text-decoration: none;
+  font-size: large;
+  cursor: pointer;
+  color: black;
+}
+
+.oddsr-nav-logo:hover {
+  color: red;
+}
+
 .nav-logout {
   cursor: pointer;
+  font-size: large;
+}
+
+.nav-logout:hover {
+  color: red;
 }

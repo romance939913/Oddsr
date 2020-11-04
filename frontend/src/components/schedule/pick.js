@@ -13,10 +13,13 @@ class SelectedPick extends React.Component {
     if (this.props.pick.length === 0) return null;
 
     const sitesArray = [];
-    this.props.pick.sites.forEach(site => {
+    this.props.pick.sites.forEach((site, idx) => {
       sitesArray.push(
-        <div>
-          <p>{site.site_key}</p>
+        <div 
+          key={idx}
+          className="selected-pick-site-container"  
+        >
+          <p className="">{site.site_key}</p>
           <div>
             <p>{this.props.pick.teams[0]}: {site.odds.spreads.points[0]}</p>
             <p>{this.props.pick.teams[1]}: {site.odds.spreads.points[1]}</p>

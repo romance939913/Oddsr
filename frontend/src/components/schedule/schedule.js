@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
 import Pick from './pick';
-import * as scheduleActions from '../../actions/schedule_actions';
+import * as scheduleActions from '../../actions/schedule/schedule_actions';
+import * as nflActions from '../../actions/schedule/nfl_actions';
+import * as ncaaActions from '../../actions/schedule/ncaaf_actions';
 import * as pickActions from '../../actions/pick_actions';
 import RingLoader from "react-spinners/RingLoader";
 import Nav from '../nav/nav';
@@ -18,6 +20,15 @@ class Schedule extends React.Component {
   }
 
   componentDidMount() {
+    this.props.clearPick();
+    this.props.fetchNFLWeek()
+      .then(week => {
+        this.props.fetchOddsNFL(week.week.data)
+      })
+    this.props.fetchNCAAFWeek()
+      .then(week => {
+        this.props.fetchOddsNCAAF(week.week.data)
+      })
     this.props.fetchSpreads('americanfootball_nfl');
     this.props.fetchSpreads('americanfootball_ncaaf');
   }
@@ -68,7 +79,7 @@ class Schedule extends React.Component {
             id={game.home_team}
             onClick={(event) => this.selectThePick(event)}
           >
-            <p>{site1}</p>
+            <p>site: {site1}</p>
             <div className="schedule-teams-array">
               <p>{game.teams[0]} {spreadTeam0} vs.</p>
               <p> {game.teams[1]} {spreadTeam1}</p>
@@ -106,14 +117,18 @@ const mapStateToProps = (state, ownProps) => ({
   history: ownProps.history,
   loggedIn: state.session.isAuthenticated,
   username: state.session.user.username,
-  spreads: state.entities.spreads,
+  spreads: state.entities.schedule.schedule,
   pick: state.entities.pick
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchSpreads: (sport) => dispatch(scheduleActions.fetchSpreads(sport)),
+  fetchOddsNFL: (week) => dispatch(nflActions.fetchOddsNFL(week)),
+  fetchNFLWeek: () => dispatch(nflActions.fetchNFLWeek()),
+  fetchOddsNCAAF: (week) => dispatch(ncaaActions.fetchOddsNCAAF(week)),
+  fetchNCAAFWeek: () => dispatch(ncaaActions.fetchNCAAFWeek()),
   selectPick: (pick) => dispatch(pickActions.receivePick(pick)),
-  clearPick: () => dispatch(pickActions.clearPick())
+  clearPick: () => dispatch(pickActions.clearPick()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
