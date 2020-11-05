@@ -1,5 +1,8 @@
-import { RECEIVE_NFL_SCHEDULE } from '../../actions/schedule/nfl_actions';
-import { RECEIVE_NFL_WEEK } from '../../actions/schedule/nfl_actions'
+import { RECEIVE_NFL_SCHEDULE,
+  RECEIVE_NFL_SEASON,
+  RECEIVE_NFL_WEEK,
+  RECEIVE_NFL_STANDINGS,
+  RECEIVE_NFL_TEAMS } from '../../actions/schedule/nfl_actions';
 
 const nflReducer = (state = [], action) => {
   Object.freeze(state);
@@ -11,8 +14,25 @@ const nflReducer = (state = [], action) => {
         nextState['schedule'][game.HomeTeamName] = game;
       })
       return nextState;
+    case RECEIVE_NFL_STANDINGS:
+      nextState['standings'] = {}
+      action.standings.data.forEach(team => {
+        nextState['standings'][team.Team] = team;
+      })
+      return nextState;
+    case RECEIVE_NFL_TEAMS:
+      nextState['teams'] = {}
+      console.log(action)
+      debugger
+      action.standings.data.forEach(team => {
+        nextState['teams'][team.Team] = team;
+      })
+      return nextState;
     case RECEIVE_NFL_WEEK:
       nextState['week'] = action.week.data;
+      return nextState;
+    case RECEIVE_NFL_SEASON:
+      nextState['season'] = action.season.data;
       return nextState;
     default:
       return state;

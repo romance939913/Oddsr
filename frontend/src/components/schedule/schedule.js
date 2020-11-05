@@ -20,14 +20,20 @@ class Schedule extends React.Component {
 
   componentDidMount() {
     this.props.clearPick();
-    this.props.fetchNFLWeek()
-      .then(week => {
-        this.props.fetchOddsNFL(week.week.data)
-      })
-    this.props.fetchNCAAFWeek()
-      .then(week => {
-        this.props.fetchOddsNCAAF(week.week.data)
-      })
+  //   this.props.fetchNFLSeason()
+  //     .then(season => {
+  //       this.props.fetchNFLWeek()
+  //         .then(week => {
+  //           this.props.fetchStandingsNFL(season.season.data)
+  //             .then(standings => {
+  //               this.props.fetchOddsNFL(week.week.data)
+  //             })
+  //         })
+  //     })
+  //   this.props.fetchNCAAFWeek()
+  //     .then(week => {
+  //       this.props.fetchOddsNCAAF(week.week.data)
+  //     })
   }
 
   setSport(selectedSport) {
@@ -47,8 +53,10 @@ class Schedule extends React.Component {
   }
 
   render() {
-    if (!this.props.nfl.schedule ||
-      !this.props.nfl.week ||
+    if (!this.props.nfl.season ||
+    !this.props.nfl.week ||
+    !this.props.nfl.schedule ||
+      !this.props.nfl.standings ||
       !this.props.ncaaf.week ||
       !this.props.ncaaf.schedule) {
       return (
@@ -76,8 +84,11 @@ class Schedule extends React.Component {
           onClick={this.selectThePick}
         >
           <div className="schedule-game-teamName-container">
-            <p>{game.HomeTeamName} vs.</p>
-            <p> {game.AwayTeamName}</p>
+            <p>{game.HomeTeamName}</p>
+            <p>({this.props[this.state.sport].standings[game.HomeTeamName].Wins} - {this.props[this.state.sport].standings[game.HomeTeamName].Losses})</p>
+            <p>vs.</p>
+            <p>{game.AwayTeamName}</p>
+            <p>({this.props[this.state.sport].standings[game.AwayTeamName].Wins} - {this.props[this.state.sport].standings[game.AwayTeamName].Losses})</p>
           </div>
         </div>
       )
@@ -117,8 +128,10 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchOddsNFL: (week) => dispatch(nflActions.fetchOddsNFL(week)),
+  fetchNFLSeason: () => dispatch(nflActions.fetchNFLSeason()),
   fetchNFLWeek: () => dispatch(nflActions.fetchNFLWeek()),
+  fetchOddsNFL: (week) => dispatch(nflActions.fetchOddsNFL(week)),
+  fetchStandingsNFL: (season) => dispatch(nflActions.fetchStandingsNFL(season)),
   fetchOddsNCAAF: (week) => dispatch(ncaaActions.fetchOddsNCAAF(week)),
   fetchNCAAFWeek: () => dispatch(ncaaActions.fetchNCAAFWeek()),
   selectPick: (pick) => dispatch(pickActions.receivePick(pick)),
