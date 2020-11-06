@@ -31,12 +31,6 @@ export const receiveNFLStandings = standings => ({
     standings
 });
 
-export const fetchNFLWeek = () => dispatch => (
-    nflAPIUtil.fetchCurrentWeek()
-        .then(week => dispatch(receiveNFLWeek(week)))
-        .catch(err => console.log(err))
-)
-
 export const fetchNFLTeams = () => dispatch => (
     nflAPIUtil.fetchTeams()
         .then(teams => dispatch(receiveNFLTeams(teams)))
@@ -46,6 +40,12 @@ export const fetchNFLTeams = () => dispatch => (
 export const fetchNFLSeason = () => dispatch => (
     nflAPIUtil.fetchCurrentSeason()
         .then(season => dispatch(receiveNFLSeason(season)))
+        .catch(err => console.log(err))
+)
+
+export const fetchNFLWeek = () => dispatch => (
+    nflAPIUtil.fetchCurrentWeek()
+        .then(week => dispatch(receiveNFLWeek(week)))
         .catch(err => console.log(err))
 )
 

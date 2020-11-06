@@ -14,13 +14,13 @@ export const receiveNCAAFWeek = week => ({
 });
 
 export const fetchOddsNCAAF = (week) => dispatch => (
-    ncaafAPIUtil.preGameOddsNCAAF(week)
+    ncaafAPIUtil.fetchPreGameOdds(week)
         .then(Schedule => dispatch(receiveNCAAFSchedule(Schedule)))
         .catch(err => console.log(err))
 )
 
 export const fetchNCAAFWeek = () => dispatch => (
-    ncaafAPIUtil.getWeekNCAAF()
+    ncaafAPIUtil.fetchCurrentWeek()
         .then(week => dispatch(receiveNCAAFWeek(week)))
         .catch(err => console.log(err))
 )

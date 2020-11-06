@@ -16,16 +16,14 @@ const nflReducer = (state = [], action) => {
       return nextState;
     case RECEIVE_NFL_STANDINGS:
       nextState['standings'] = {}
-      action.standings.data.forEach(team => {
-        nextState['standings'][team.Team] = team;
+      action.standings.data.forEach(standing => {
+        nextState['standings'][standing.Team] = standing;
       })
       return nextState;
     case RECEIVE_NFL_TEAMS:
       nextState['teams'] = {}
-      console.log(action)
-      debugger
-      action.standings.data.forEach(team => {
-        nextState['teams'][team.Team] = team;
+      action.teams.data.forEach(team => {
+        nextState['teams'][team.Key] = team;
       })
       return nextState;
     case RECEIVE_NFL_WEEK:

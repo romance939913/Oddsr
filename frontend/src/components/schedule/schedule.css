@@ -32,3 +32,8 @@
 .schedule-game-teamName-container {
     display: flex;
 }
+
+.schedule-game-home-team-img {
+    height: 65px;
+    width: 75px;
+}

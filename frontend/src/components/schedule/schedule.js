@@ -20,20 +20,21 @@ class Schedule extends React.Component {
 
   componentDidMount() {
     this.props.clearPick();
-  //   this.props.fetchNFLSeason()
-  //     .then(season => {
-  //       this.props.fetchNFLWeek()
-  //         .then(week => {
-  //           this.props.fetchStandingsNFL(season.season.data)
-  //             .then(standings => {
-  //               this.props.fetchOddsNFL(week.week.data)
-  //             })
-  //         })
-  //     })
-  //   this.props.fetchNCAAFWeek()
-  //     .then(week => {
-  //       this.props.fetchOddsNCAAF(week.week.data)
-  //     })
+    this.props.fetchNFLTeams();
+    this.props.fetchNFLSeason()
+      .then(season => {
+        this.props.fetchNFLWeek()
+          .then(week => {
+            this.props.fetchStandingsNFL(season.season.data)
+              .then(standings => {
+                this.props.fetchOddsNFL(week.week.data)
+              })
+          })
+      })
+    this.props.fetchNCAAFWeek()
+      .then(week => {
+        this.props.fetchOddsNCAAF(week.week.data)
+      })
   }
 
   setSport(selectedSport) {
@@ -41,6 +42,7 @@ class Schedule extends React.Component {
     this.setState({
       sport: selectedSport
     })
+    debugger
   }
 
   selectThePick(e) {
@@ -53,9 +55,10 @@ class Schedule extends React.Component {
   }
 
   render() {
-    if (!this.props.nfl.season ||
-    !this.props.nfl.week ||
-    !this.props.nfl.schedule ||
+    if (!this.props.nfl.teams ||
+      !this.props.nfl.season ||
+      !this.props.nfl.week ||
+      !this.props.nfl.schedule ||
       !this.props.nfl.standings ||
       !this.props.ncaaf.week ||
       !this.props.ncaaf.schedule) {
@@ -85,10 +88,13 @@ class Schedule extends React.Component {
         >
           <div className="schedule-game-teamName-container">
             <p>{game.HomeTeamName}</p>
-            <p>({this.props[this.state.sport].standings[game.HomeTeamName].Wins} - {this.props[this.state.sport].standings[game.HomeTeamName].Losses})</p>
+            <img className="schedule-game-home-team-img" src={this.props[this.state.sport].teams[game.HomeTeamName].WikipediaLogoUrl}/>
+            <p>({this.props[this.state.sport].standings[game.HomeTeamName].Wins} 
+              - {this.props[this.state.sport].standings[game.HomeTeamName].Losses})</p>
             <p>vs.</p>
             <p>{game.AwayTeamName}</p>
-            <p>({this.props[this.state.sport].standings[game.AwayTeamName].Wins} - {this.props[this.state.sport].standings[game.AwayTeamName].Losses})</p>
+            <p>({this.props[this.state.sport].standings[game.AwayTeamName].Wins} 
+              - {this.props[this.state.sport].standings[game.AwayTeamName].Losses})</p>
           </div>
         </div>
       )
@@ -128,6 +134,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  fetchNFLTeams: () => dispatch(nflActions.fetchNFLTeams()),
   fetchNFLSeason: () => dispatch(nflActions.fetchNFLSeason()),
   fetchNFLWeek: () => dispatch(nflActions.fetchNFLWeek()),
   fetchOddsNFL: (week) => dispatch(nflActions.fetchOddsNFL(week)),
