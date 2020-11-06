@@ -1,10 +1,14 @@
 .schedule-game-container {
-    display: flex;
-    justify-content: space-between;
     padding: 10px;
     border: 1px solid black;
     margin: 10px;
     cursor: pointer;
+    width: 30vw;
+}
+
+.schedule-game-matchup-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .schedule-game-container:hover {
@@ -32,4 +36,11 @@
     flex-direction: column;
     align-items: flex-start;
     margin-right: 5px;
+}
+
+.schedule-game-dateTime {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-top: 3px;
 }

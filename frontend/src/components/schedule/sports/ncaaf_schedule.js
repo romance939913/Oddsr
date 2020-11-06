@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import * as pickActions from '../../../actions/pick_actions';
 import './ncaafSchedule.css'
 
@@ -36,24 +37,30 @@ class SelectedPick extends React.Component {
           id={game.HomeTeamId}
           onClick={this.selectThePick}
         >
-          <div className="schedule-game-homeTeam-container">
-            <div className="schedule-game-teamName-container">
-              <p>{game.HomeTeamName}</p>
-              <p> {homeTeamRank}</p>
+          <div className="schedule-game-matchup-container">
+            <div className="schedule-game-homeTeam-container">
+              <div className="schedule-game-teamName-container">
+                <p>{game.HomeTeamName}</p>
+                <p> {homeTeamRank}</p>
+              </div>
+              <img className="schedule-game-img" src={this.props.ncaaf.teams[game.HomeTeamId].TeamLogoUrl} />
+              <p className="schedule-game-team-record">({this.props.ncaaf.teams[game.HomeTeamId].Wins}
+                - {this.props.ncaaf.teams[game.HomeTeamId].Losses})</p>
             </div>
-            <img className="schedule-game-img" src={this.props.ncaaf.teams[game.HomeTeamId].TeamLogoUrl} />
-            <p className="schedule-game-team-record">({this.props.ncaaf.teams[game.HomeTeamId].Wins}
-              - {this.props.ncaaf.teams[game.HomeTeamId].Losses})</p>
+            <p className="schedule-game-vs">vs.</p>
+            <div className="schedule-game-awayTeam-container">
+              <div className="schedule-game-teamName-container">
+                <p>{game.AwayTeamName}</p>
+                <p>{awayTeamRank}</p>
+              </div>
+              <img className="schedule-game-img" src={this.props.ncaaf.teams[game.AwayTeamId].TeamLogoUrl} />
+              <p className="schedule-game-team-record">({this.props.ncaaf.teams[game.AwayTeamId].Wins}
+                - {this.props.ncaaf.teams[game.AwayTeamId].Losses})</p>
+            </div>
           </div>
-          <p className="schedule-game-vs">vs.</p>
-          <div className="schedule-game-awayTeam-container">
-            <div className="schedule-game-teamName-container">
-              <p>{game.AwayTeamName}</p>
-              <p>{awayTeamRank}</p>
-            </div>
-            <img className="schedule-game-img" src={this.props.ncaaf.teams[game.AwayTeamId].TeamLogoUrl} />
-            <p className="schedule-game-team-record">({this.props.ncaaf.teams[game.AwayTeamId].Wins}
-              - {this.props.ncaaf.teams[game.AwayTeamId].Losses})</p>
+          <div className="schedule-game-dateTime">
+            <p>{moment(game.DateTime).format("dddd, MMMM Do YYYY")}</p>
+            <p>{moment(game.DateTime).format("h:mm a")}</p>
           </div>
         </div>
       )

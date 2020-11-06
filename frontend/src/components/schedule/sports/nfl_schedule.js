@@ -30,6 +30,9 @@ class SelectedPick extends React.Component {
           id={game.HomeTeamId}
           onClick={this.selectThePick}
         >
+          <div className="schedule-game-homeTeam-container">
+
+          </div>
           <div className="schedule-game-teamName-container">
             <p>{game.HomeTeamName}</p>
             <img className="schedule-game-home-team-img" src={this.props.nfl.teams[game.HomeTeamId].WikipediaLogoUrl} />
