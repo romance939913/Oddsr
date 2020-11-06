@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as pickActions from '../../../actions/pick_actions';
-import './sports_schedule.css'
+import './nflSchedule.css'
 
 class SelectedPick extends React.Component {
   constructor(props) {
@@ -37,6 +37,7 @@ class SelectedPick extends React.Component {
             - {this.props.nfl.standings[game.HomeTeamName].Losses})</p>
             <p>vs.</p>
             <p>{game.AwayTeamName}</p>
+            <img className="schedule-game-home-team-img" src={this.props.nfl.teams[game.AwayTeamName].WikipediaLogoUrl} />
             <p>({this.props.nfl.standings[game.AwayTeamName].Wins}
             - {this.props.nfl.standings[game.AwayTeamName].Losses})</p>
           </div>

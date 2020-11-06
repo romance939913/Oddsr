@@ -19,8 +19,8 @@ class Schedule extends React.Component {
   }
 
   componentDidMount() {
-    this.props.clearPick();
-    this.props.fetchNFLTeams();
+    this.props.clearPick()
+    this.props.fetchNFLTeams()
     this.props.fetchNFLSeason()
       .then(season => {
         this.props.fetchNFLWeek()
@@ -28,13 +28,17 @@ class Schedule extends React.Component {
             this.props.fetchStandingsNFL(season.season.data)
               .then(standings => {
                 this.props.fetchOddsNFL(week.week.data)
-              })
-          })
-      })
-    this.props.fetchNCAAFWeek()
-      .then(week => {
-        this.props.fetchOddsNCAAF(week.week.data)
-      })
+              });
+          });
+      });
+    this.props.fetchNCAAFTeams()
+    this.props.fetchNCAAFSeason()
+      .then(season => {
+        this.props.fetchNCAAFWeek()
+          .then(week => {
+            this.props.fetchOddsNCAAF(week.week.data, season.season.data)
+          });
+      });
   }
 
   setSport(selectedSport) {
@@ -66,6 +70,16 @@ class Schedule extends React.Component {
       )
     }
 
+    let selectedSchedule
+    switch (this.state.sport) {
+      case 'nfl':
+        selectedSchedule = <NFLSchedule />
+        break;
+      case 'ncaaf':
+        console.log('ncaa poopy');
+        break; 
+    }
+
     return (
       <div>
         <Nav />
@@ -81,7 +95,7 @@ class Schedule extends React.Component {
         </div>
         <div className="schedule-and-pick-container">
           <div className="schedule-container">
-            <NFLSchedule />
+            {selectedSchedule}
           </div>
           <Pick />
         </div>
@@ -105,8 +119,10 @@ const mapDispatchToProps = dispatch => ({
   fetchNFLWeek: () => dispatch(nflActions.fetchNFLWeek()),
   fetchOddsNFL: (week) => dispatch(nflActions.fetchOddsNFL(week)),
   fetchStandingsNFL: (season) => dispatch(nflActions.fetchStandingsNFL(season)),
-  fetchOddsNCAAF: (week) => dispatch(ncaaActions.fetchOddsNCAAF(week)),
+  fetchNCAAFTeams: () => dispatch(ncaaActions.fetchNCAAFTeams()),
   fetchNCAAFWeek: () => dispatch(ncaaActions.fetchNCAAFWeek()),
+  fetchNCAAFSeason: () => dispatch(ncaaActions.fetchNCAAFSeason()),
+  fetchOddsNCAAF: (week, season) => dispatch(ncaaActions.fetchOddsNCAAF(week, season)),
   selectPick: (pick) => dispatch(pickActions.receivePick(pick)),
   clearPick: () => dispatch(pickActions.clearPick()),
 })
