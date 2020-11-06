@@ -1,26 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { parseDomain, fromUrl } from "parse-domain";
-import { receivePick,
-          clearPick } from '../../actions/pick_actions';
+import * as pickActions from '../../actions/pick_actions';
 import './pick.css'
 
 class SelectedPick extends React.Component {
   constructor(props) {
     super(props)
   }
-  
+
   render() {
     if (this.props.pick.length === 0) return null;
 
     const sitesArray = [];
     this.props.pick.PregameOdds.forEach((book, idx) => {
       if (!book.SportsbookUrl) return;
-      const { domain } = parseDomain(fromUrl(book.SportsbookUrl),);
+      const { domain } = parseDomain(fromUrl(book.SportsbookUrl));
       sitesArray.push(
-        <div 
+        <div
           key={idx}
-          className="selected-pick-site-container"  
+          className="selected-pick-site-container"
         >
           <p className="">{domain}</p>
           <div>
@@ -48,14 +47,14 @@ class SelectedPick extends React.Component {
     )
   }
 }
-  
+
 const mapStateToProps = (state, ownProps) => ({
   pick: state.entities.pick
 })
 
 const mapDispatchToProps = dispatch => ({
-  receivePick: (pick) => dispatch(receivePick(pick)),
-  clearPick: () => dispatch(clearPick())
+  receivePick: (pick) => dispatch(pickActions.receivePick(pick)),
+  clearPick: () => dispatch(pickActions.clearPick())
 })
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(SelectedPick);

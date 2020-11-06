@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import Pick from './pick';
+import NFLSchedule from './sports/nfl_schedule';
 import * as nflActions from '../../actions/schedule/nfl_actions';
 import * as ncaaActions from '../../actions/schedule/ncaaf_actions';
 import * as pickActions from '../../actions/pick_actions';
@@ -15,7 +16,6 @@ class Schedule extends React.Component {
       sport: 'nfl',
     }
     this.setSport = this.setSport.bind(this);
-    this.selectThePick = this.selectThePick.bind(this);
   }
 
   componentDidMount() {
@@ -45,15 +45,6 @@ class Schedule extends React.Component {
     debugger
   }
 
-  selectThePick(e) {
-    let pickHomeTeam = this.props[this.state.sport].schedule[e.currentTarget.id];
-    if (pickHomeTeam.HomeTeamName === this.props.pick.HomeTeamName) {
-      this.props.clearPick()
-    } else {
-      this.props.selectPick(pickHomeTeam);
-    }
-  }
-
   render() {
     if (!this.props.nfl.teams ||
       !this.props.nfl.season ||
@@ -75,31 +66,6 @@ class Schedule extends React.Component {
       )
     }
 
-    let scheduleArray = [];
-    Object.values(this.props[this.state.sport].schedule).forEach((game, idx) => {
-      if (game.PregameOdds.length === 0) return;
-      if (!game.PregameOdds[0].SportsbookUrl) return;
-      scheduleArray.push(
-        <div 
-          className="schedule-game-container"
-          key={idx}
-          id={game.HomeTeamName}
-          onClick={this.selectThePick}
-        >
-          <div className="schedule-game-teamName-container">
-            <p>{game.HomeTeamName}</p>
-            <img className="schedule-game-home-team-img" src={this.props[this.state.sport].teams[game.HomeTeamName].WikipediaLogoUrl}/>
-            <p>({this.props[this.state.sport].standings[game.HomeTeamName].Wins} 
-              - {this.props[this.state.sport].standings[game.HomeTeamName].Losses})</p>
-            <p>vs.</p>
-            <p>{game.AwayTeamName}</p>
-            <p>({this.props[this.state.sport].standings[game.AwayTeamName].Wins} 
-              - {this.props[this.state.sport].standings[game.AwayTeamName].Losses})</p>
-          </div>
-        </div>
-      )
-    })
-
     return (
       <div>
         <Nav />
@@ -115,7 +81,7 @@ class Schedule extends React.Component {
         </div>
         <div className="schedule-and-pick-container">
           <div className="schedule-container">
-            {scheduleArray}
+            <NFLSchedule />
           </div>
           <Pick />
         </div>

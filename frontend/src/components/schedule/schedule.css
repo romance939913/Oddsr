@@ -17,23 +17,3 @@
     display: flex;
     justify-content: center;
 }
-
-.schedule-game-container {
-    padding: 10px;
-    border: 1px solid black;
-    margin: 10px;
-    cursor: pointer;
-}
-
-.schedule-game-container:hover {
-    border: 1px solid red;
-}
-
-.schedule-game-teamName-container {
-    display: flex;
-}
-
-.schedule-game-home-team-img {
-    height: 65px;
-    width: 75px;
-}
