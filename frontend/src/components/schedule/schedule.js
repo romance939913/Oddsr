@@ -100,7 +100,7 @@ class Schedule extends React.Component {
           <div className="schedule-container">
             {selectedSchedule}
           </div>
-          <Pick />
+          <Pick sport={this.state.sport}/>
         </div>
       </div>
     );

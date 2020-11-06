@@ -39,8 +39,9 @@ class SelectedPick extends React.Component {
         >
           <div className="schedule-game-matchup-container">
             <div className="schedule-game-homeTeam-container">
+              <p>{this.props.ncaaf.teams[game.HomeTeamId].School}</p>
               <div className="schedule-game-teamName-container">
-                <p>{game.HomeTeamName}</p>
+                <p>{this.props.ncaaf.teams[game.HomeTeamId].Name}</p>
                 <p> {homeTeamRank}</p>
               </div>
               <img className="schedule-game-img" src={this.props.ncaaf.teams[game.HomeTeamId].TeamLogoUrl} />
@@ -49,9 +50,10 @@ class SelectedPick extends React.Component {
             </div>
             <p className="schedule-game-vs">vs.</p>
             <div className="schedule-game-awayTeam-container">
+              <p>{this.props.ncaaf.teams[game.AwayTeamId].School}</p>
               <div className="schedule-game-teamName-container">
-                <p>{game.AwayTeamName}</p>
-                <p>{awayTeamRank}</p>
+                <p>{this.props.ncaaf.teams[game.AwayTeamId].Name}</p>
+                <p> {homeTeamRank}</p>
               </div>
               <img className="schedule-game-img" src={this.props.ncaaf.teams[game.AwayTeamId].TeamLogoUrl} />
               <p className="schedule-game-team-record">({this.props.ncaaf.teams[game.AwayTeamId].Wins}
@@ -78,7 +80,6 @@ const mapStateToProps = (state, ownProps) => ({
   history: ownProps.history,
   loggedIn: state.session.isAuthenticated,
   username: state.session.user.username,
-  nfl: state.entities.schedule.nfl,
   ncaaf: state.entities.schedule.ncaaf,
   pick: state.entities.pick
 });

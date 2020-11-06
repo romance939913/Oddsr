@@ -1,7 +1,7 @@
 .schedule-game-container {
     padding: 10px;
     border: 1px solid black;
-    margin: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     width: 30vw;
 }
@@ -9,6 +9,7 @@
 .schedule-game-matchup-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .schedule-game-container:hover {
@@ -28,19 +29,19 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-left: 5px;
+    width: 13vw;
 }
 
 .schedule-game-homeTeam-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-right: 5px;
+    width: 13vw;
 }
 
 .schedule-game-dateTime {
     display: flex;
     justify-content: space-between;
-    font-size: 15px;
+    font-size: 13px;
     margin-top: 3px;
 }

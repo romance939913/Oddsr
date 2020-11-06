@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import * as pickActions from '../../../actions/pick_actions';
 import './nflSchedule.css'
 
@@ -30,19 +31,26 @@ class SelectedPick extends React.Component {
           id={game.HomeTeamId}
           onClick={this.selectThePick}
         >
-          <div className="schedule-game-homeTeam-container">
-
-          </div>
-          <div className="schedule-game-teamName-container">
-            <p>{game.HomeTeamName}</p>
-            <img className="schedule-game-home-team-img" src={this.props.nfl.teams[game.HomeTeamId].WikipediaLogoUrl} />
-            <p>({this.props.nfl.standings[game.HomeTeamId].Wins}
-            - {this.props.nfl.standings[game.HomeTeamId].Losses})</p>
+          <div className="schedule-game-matchup-container">
+            <div className="schedule-game-homeTeam-container">
+              <p>{this.props.nfl.teams[game.HomeTeamId].City}</p>
+              <p>{this.props.nfl.teams[game.HomeTeamId].Name}</p>
+              <img className="schedule-game-img" src={this.props.nfl.teams[game.HomeTeamId].WikipediaLogoUrl} />
+              <p>({this.props.nfl.standings[game.HomeTeamId].Wins}
+              - {this.props.nfl.standings[game.HomeTeamId].Losses})</p>
+            </div>
             <p>vs.</p>
-            <p>{game.AwayTeamName}</p>
-            <img className="schedule-game-home-team-img" src={this.props.nfl.teams[game.AwayTeamId].WikipediaLogoUrl} />
-            <p>({this.props.nfl.standings[game.AwayTeamId].Wins}
-            - {this.props.nfl.standings[game.AwayTeamId].Losses})</p>
+            <div className="schedule-game-awayTeam-container">
+              <p>{this.props.nfl.teams[game.AwayTeamId].City}</p>
+              <p>{this.props.nfl.teams[game.AwayTeamId].Name}</p>
+              <img className="schedule-game-img" src={this.props.nfl.teams[game.AwayTeamId].WikipediaLogoUrl} />
+              <p>({this.props.nfl.standings[game.AwayTeamId].Wins}
+              - {this.props.nfl.standings[game.AwayTeamId].Losses})</p>
+            </div>
+          </div>
+          <div className="schedule-game-dateTime">
+            <p>{moment(game.DateTime).format("dddd, MMMM Do YYYY")}</p>
+            <p>{moment(game.DateTime).format("h:mm a")}</p>
           </div>
         </div>
       )
@@ -62,7 +70,7 @@ const mapStateToProps = (state, ownProps) => ({
   username: state.session.user.username,
   nfl: state.entities.schedule.nfl,
   ncaaf: state.entities.schedule.ncaaf,
-  pick: state.entities.pick
+  pick: state.entities.pick,
 });
 
 const mapDispatchToProps = dispatch => ({

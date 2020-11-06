@@ -3,17 +3,40 @@
     border: 1px solid black;
     margin: 10px;
     cursor: pointer;
+    width: 32vw;
 }
 
 .schedule-game-container:hover {
     border: 1px solid red;
 }
 
-.schedule-game-teamName-container {
+.schedule-game-matchup-container {
     display: flex;
+    justify-content: space-between;
 }
 
-.schedule-game-home-team-img {
-    height: 40px;
-    width: 50px;
+.schedule-game-homeTeam-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.schedule-game-homeTeam-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.schedule-game-img {
+    height: 50px;
+    width: 65px;
+}
+
+.schedule-game-dateTime {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-top: 3px;
 }

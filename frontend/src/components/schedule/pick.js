@@ -21,14 +21,14 @@ class SelectedPick extends React.Component {
           key={idx}
           className="selected-pick-site-container"
         >
-          <p className="">{domain}</p>
-          <div>
-            <p>Spread</p>
+          <p className="selected-pick-site-name">{domain}</p>
+          <div className="selected-pick-spread-container">
+            <p className="selected-pick-bet-type">Spread</p>
             <p>{this.props.pick.HomeTeamName}: {book.HomePointSpread}</p>
             <p>{this.props.pick.AwayTeamName}: {book.AwayPointSpread}</p>
           </div>
-          <div>
-            <p>Money Line</p>
+          <div className="selected-pick-moneyline-container">
+            <p className="selected-pick-bet-type">Money Line</p>
             <p>{this.props.pick.HomeTeamName}: {book.HomeMoneyLine}</p>
             <p>{this.props.pick.AwayTeamName}: {book.AwayMoneyLine}</p>
           </div>

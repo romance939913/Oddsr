@@ -1,13 +1,25 @@
 .selected-pick-container {
     border: solid black 1px;
     margin: 5px;
+    width: 20vw;
 }
 
 .selected-pick-teams-container {
     display: flex;
     padding: 5px;
+    font-size: 20px;
 }
 
 .selected-pick-site-container {
+    border: 1px solid black;
     padding: 5px;
+    margin: 15px 5px 15px 5px;
+}
+
+.selected-pick-site-name {
+    font-size: 18px;
+}
+
+.selected-pick-bet-type:hover {
+    color: red;
 }
