@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import Pick from './pick';
 import NFLSchedule from './sports/nfl_schedule';
+import NCAAFSchedule from './sports/ncaaf_schedule';
 import * as nflActions from '../../actions/schedule/nfl_actions';
 import * as ncaaActions from '../../actions/schedule/ncaaf_actions';
 import * as pickActions from '../../actions/pick_actions';
@@ -55,7 +56,9 @@ class Schedule extends React.Component {
       !this.props.nfl.week ||
       !this.props.nfl.schedule ||
       !this.props.nfl.standings ||
+      !this.props.ncaaf.season ||
       !this.props.ncaaf.week ||
+      !this.props.ncaaf.teams ||
       !this.props.ncaaf.schedule) {
       return (
         <div>
@@ -76,7 +79,7 @@ class Schedule extends React.Component {
         selectedSchedule = <NFLSchedule />
         break;
       case 'ncaaf':
-        console.log('ncaa poopy');
+        selectedSchedule = <NCAAFSchedule />
         break; 
     }
 

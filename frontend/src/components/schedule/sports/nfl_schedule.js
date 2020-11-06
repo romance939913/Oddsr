@@ -11,7 +11,7 @@ class SelectedPick extends React.Component {
 
   selectThePick(e) {
     let pickHomeTeam = this.props.nfl.schedule[e.currentTarget.id];
-    if (pickHomeTeam.HomeTeamName === this.props.pick.HomeTeamName) {
+    if (pickHomeTeam.HomeTeamId === this.props.pick.HomeTeamId) {
       this.props.clearPick()
     } else {
       this.props.selectPick(pickHomeTeam);
@@ -27,19 +27,19 @@ class SelectedPick extends React.Component {
         <div
           className="schedule-game-container"
           key={idx}
-          id={game.HomeTeamName}
+          id={game.HomeTeamId}
           onClick={this.selectThePick}
         >
           <div className="schedule-game-teamName-container">
             <p>{game.HomeTeamName}</p>
-            <img className="schedule-game-home-team-img" src={this.props.nfl.teams[game.HomeTeamName].WikipediaLogoUrl} />
-            <p>({this.props.nfl.standings[game.HomeTeamName].Wins}
-            - {this.props.nfl.standings[game.HomeTeamName].Losses})</p>
+            <img className="schedule-game-home-team-img" src={this.props.nfl.teams[game.HomeTeamId].WikipediaLogoUrl} />
+            <p>({this.props.nfl.standings[game.HomeTeamId].Wins}
+            - {this.props.nfl.standings[game.HomeTeamId].Losses})</p>
             <p>vs.</p>
             <p>{game.AwayTeamName}</p>
-            <img className="schedule-game-home-team-img" src={this.props.nfl.teams[game.AwayTeamName].WikipediaLogoUrl} />
-            <p>({this.props.nfl.standings[game.AwayTeamName].Wins}
-            - {this.props.nfl.standings[game.AwayTeamName].Losses})</p>
+            <img className="schedule-game-home-team-img" src={this.props.nfl.teams[game.AwayTeamId].WikipediaLogoUrl} />
+            <p>({this.props.nfl.standings[game.AwayTeamId].Wins}
+            - {this.props.nfl.standings[game.AwayTeamId].Losses})</p>
           </div>
         </div>
       )

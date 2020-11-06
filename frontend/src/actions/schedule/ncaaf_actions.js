@@ -25,7 +25,6 @@ export const receiveNCAAFSchedule = schedule => ({
     schedule
 });
 
-
 export const fetchNCAAFTeams = () => dispatch => (
     ncaafAPIUtil.fetchTeams()
         .then(teams => dispatch(receiveNCAAFTeams(teams)))

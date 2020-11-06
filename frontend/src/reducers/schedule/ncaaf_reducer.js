@@ -10,7 +10,7 @@ const ncaafReducer = (state = [], action) => {
     case RECEIVE_NCAAF_SCHEDULE:
       nextState['schedule'] = {}
       action.schedule.data.forEach(game => {
-        nextState['schedule'][game.HomeTeamName] = game;
+        nextState['schedule'][game.HomeTeamId] = game;
       })
       return nextState;
     case RECEIVE_NCAAF_WEEK:

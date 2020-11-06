@@ -1,0 +1,35 @@
+.schedule-game-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.schedule-game-container:hover {
+    border: 1px solid red;
+}
+
+.schedule-game-teamName-container {
+    display: flex;
+}
+
+.schedule-game-img {
+    height: 50px;
+    width: 65px;
+}
+
+.schedule-game-awayTeam-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 5px;
+}
+
+.schedule-game-homeTeam-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 5px;
+}

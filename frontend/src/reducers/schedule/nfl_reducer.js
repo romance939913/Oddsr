@@ -11,19 +11,19 @@ const nflReducer = (state = [], action) => {
     case RECEIVE_NFL_SCHEDULE:
       nextState['schedule'] = {}
       action.schedule.data.forEach(game => {
-        nextState['schedule'][game.HomeTeamName] = game;
+        nextState['schedule'][game.HomeTeamId] = game;
       })
       return nextState;
     case RECEIVE_NFL_STANDINGS:
       nextState['standings'] = {}
       action.standings.data.forEach(standing => {
-        nextState['standings'][standing.Team] = standing;
+        nextState['standings'][standing.TeamID] = standing;
       })
       return nextState;
     case RECEIVE_NFL_TEAMS:
       nextState['teams'] = {}
       action.teams.data.forEach(team => {
-        nextState['teams'][team.Key] = team;
+        nextState['teams'][team.TeamID] = team;
       })
       return nextState;
     case RECEIVE_NFL_WEEK:
