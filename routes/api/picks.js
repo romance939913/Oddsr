@@ -4,15 +4,14 @@ const Capper = require('../../models/Capper');
 const Pick = require('../../models/Pick');
 // const keys = require('../../config/keys');
 // const jwt = require('jsonwebtoken');
-// const passport = require('passport');
-// const validateRegisterInput = require('../../validations/capperRegister');
-// const validateLoginInput = require("../../validations/capperLogin")
+const passport = require('passport');
 
 router.get("/test", (req, res) => {
   res.json({ msg: "this is the picks route" })
 })
 
 router.post("/new_pick/:capper_id",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const newPick = new Pick({
       team: req.body.team,
@@ -35,7 +34,7 @@ router.post("/new_pick/:capper_id",
 )
 
 router.get("/picks/:capper_id",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Capper
       .find()

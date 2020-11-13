@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const PickSchema = new Schema({
+    betType: {
+        type: String,
+        required: true
+    },
     team: {
         type: String,
         required: true
@@ -10,9 +14,9 @@ const PickSchema = new Schema({
         type: String,
         required: true
     },
-    units: {
+    globalGameId: {
         type: Number,
-        required: true
+        required: true,
     },
     Outcome: {
         type: String,

@@ -9,6 +9,10 @@ class SelectedPick extends React.Component {
     super(props)
   }
 
+  chooseBet(e) {
+
+  }
+
   render() {
     if (this.props.pick.length === 0) return null;
 
@@ -23,7 +27,10 @@ class SelectedPick extends React.Component {
         >
           <p className="selected-pick-site-name">{domain}</p>
           <div className="selected-pick-spread-container">
-            <p className="selected-pick-bet-type">Spread</p>
+            <p 
+              className="selected-pick-bet-type"
+// 
+              onClick={this.chooseBet}>Spread</p>
             <p>{this.props.pick.HomeTeamName}: {book.HomePointSpread}</p>
             <p>{this.props.pick.AwayTeamName}: {book.AwayPointSpread}</p>
           </div>
