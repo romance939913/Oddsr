@@ -10,13 +10,14 @@ router.get("/test", (req, res) => {
   res.json({ msg: "this is the picks route" })
 })
 
-router.post("/new_pick/:capper_id",
+router.post("/new-pick/:capper_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const newPick = new Pick({
       team: req.body.team,
       spread: req.body.spread,
-      units: req.body.units,
+      betType: req.body.betType,
+      globalGameId: req.body.globalGameId
     })
     newPick
       .save()

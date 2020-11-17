@@ -22,4 +22,5 @@
 
 .selected-pick-bet-type:hover {
     color: red;
+    cursor: pointer;
 }

@@ -3,7 +3,6 @@ import { RECEIVE_PICK,
 
 const pickReducer = (state = [], action) => {
   Object.freeze(state);
-  let nextState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_PICK:
       return action.pick;

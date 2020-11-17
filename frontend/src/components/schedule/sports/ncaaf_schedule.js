@@ -22,8 +22,8 @@ class SelectedPick extends React.Component {
   render() {
     let scheduleArray = [];
     Object.values(this.props.ncaaf.schedule).forEach((game, idx) => {
-      if (game.PregameOdds.length === 0) return;
-      if (!game.PregameOdds[0].SportsbookUrl) return;
+      // if (game.PregameOdds.length === 0) return;
+      // if (!game.PregameOdds[0].SportsbookUrl) return;
       let homeTeamRank
       let awayTeamRank
       let homeTeamRankVar = this.props.ncaaf.teams[game.HomeTeamId].ApRank
