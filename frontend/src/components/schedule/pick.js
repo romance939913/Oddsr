@@ -12,31 +12,16 @@ class SelectedPick extends React.Component {
 
   chooseBet(e) {
     let selectedPick = this.props.pick.PregameOdds[e.currentTarget.id]
-    if (e.currentTarget.innerHTML === 'Spread') {
-      let payload = {
-        capperId: this.props.capper.id,
-        betType: 'Spread',
-        team: 'pickedTeam',
-        spread: `home: ${selectedPick.HomePointSpread}, away: ${selectedPick.AwayPointSpread}`,
-        globalGameId: this.props.pick.GlobalGameId,
-        gameOddId: selectedPick.GameOddId
-      }
-      console.log(payload)
-      debugger
-      this.props.createPick(payload)
-    } else {
-      let payload = {
-        capperId: this.props.capper.id,
-        betType: 'MoneyLine',
-        team: 'pickedTeam',
-        spread: `home: ${selectedPick.HomeMoneyLine}, away: ${selectedPick.AwayMoneyLine}`,
-        globalGameId: this.props.pick.GlobalGameId,
-        gameOddId: selectedPick.GameOddId
-      }
-      console.log(payload)
-      debugger
-      // this.props.createPick(payload)
+    let payload = {
+      capperId: this.props.capper.id,
+      sport: this.props.sport,
+      betType: e.currentTarget.innerHTML,
+      team: 'pickedTeam',
+      spread: `home: ${selectedPick.HomePointSpread}, away: ${selectedPick.AwayPointSpread}`,
+      globalGameId: this.props.pick.GlobalGameId,
+      gameOddId: selectedPick.GameOddId
     }
+    this.props.createPick(payload)
   }
 
   render() {

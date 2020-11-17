@@ -9,8 +9,8 @@ export const fetchCurrentWeek = () => {
   return axios.get(`https://api.sportsdata.io/v3/nfl/scores/json/CurrentWeek?key=${keys.sportsDataNFL}`);
 };
 
-export const fetchPreGameOdds = week => {
-  return axios.get(`https://api.sportsdata.io/v3/nfl/odds/json/GameOddsByWeek/2020/${week}?key=${keys.sportsDataNFL}`);
+export const fetchPreGameOdds = (week, season) => {
+  return axios.get(`https://api.sportsdata.io/v3/nfl/odds/json/GameOddsByWeek/${season}/${week}?key=${keys.sportsDataNFL}`);
 };
 
 export const fetchTeams = () => {

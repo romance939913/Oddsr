@@ -12,9 +12,10 @@ class SelectedCapper extends React.Component {
     if (this.props.capper.length === 0) return null;
 
     let picksArr = [];
+    let dataArray = this.props.capper.picks
 
     if (this.props.capper.picks) {
-      this.props.capper.picks.slice(0, 5).forEach((pick, idx) => {
+      dataArray.slice(Math.max(dataArray.length - 5, 0)).forEach((pick, idx) => {
         picksArr.push(
           <div className="selected-capper-pick" key={idx}>
             <p>date: {pick.date.split("T")[0]}</p>

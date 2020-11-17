@@ -49,8 +49,8 @@ export const fetchNFLWeek = () => dispatch => (
         .catch(err => console.log(err))
 )
 
-export const fetchOddsNFL = (week) => dispatch => (
-    nflAPIUtil.fetchPreGameOdds(week)
+export const fetchOddsNFL = (week, season) => dispatch => (
+    nflAPIUtil.fetchPreGameOdds(week, season)
         .then(schedule => dispatch(receiveNFLSchedule(schedule)))
         .catch(err => console.log(err))
 )

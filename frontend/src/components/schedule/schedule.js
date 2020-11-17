@@ -6,6 +6,7 @@ import NCAAFSchedule from './sports/ncaaf_schedule';
 import * as nflActions from '../../actions/schedule/nfl_actions';
 import * as ncaaActions from '../../actions/schedule/ncaaf_actions';
 import * as pickActions from '../../actions/pick_actions';
+import * as capperActions from '../../actions/capper_actions'
 import RingLoader from "react-spinners/RingLoader";
 import Nav from '../nav/nav';
 import './schedule.css'
@@ -28,7 +29,7 @@ class Schedule extends React.Component {
           .then(week => {
             this.props.fetchStandingsNFL(season.season.data)
               .then(standings => {
-                this.props.fetchOddsNFL(week.week.data)
+                this.props.fetchOddsNFL(week.week.data, season.season.data)
               });
           });
       });
@@ -40,6 +41,7 @@ class Schedule extends React.Component {
             this.props.fetchOddsNCAAF(week.week.data, season.season.data)
           });
       });
+    this.props.fetchCappers();
   }
 
   setSport(selectedSport) {
@@ -120,12 +122,13 @@ const mapDispatchToProps = dispatch => ({
   fetchNFLTeams: () => dispatch(nflActions.fetchNFLTeams()),
   fetchNFLSeason: () => dispatch(nflActions.fetchNFLSeason()),
   fetchNFLWeek: () => dispatch(nflActions.fetchNFLWeek()),
-  fetchOddsNFL: (week) => dispatch(nflActions.fetchOddsNFL(week)),
+  fetchOddsNFL: (week, season) => dispatch(nflActions.fetchOddsNFL(week, season)),
   fetchStandingsNFL: (season) => dispatch(nflActions.fetchStandingsNFL(season)),
   fetchNCAAFTeams: () => dispatch(ncaaActions.fetchNCAAFTeams()),
   fetchNCAAFWeek: () => dispatch(ncaaActions.fetchNCAAFWeek()),
   fetchNCAAFSeason: () => dispatch(ncaaActions.fetchNCAAFSeason()),
   fetchOddsNCAAF: (week, season) => dispatch(ncaaActions.fetchOddsNCAAF(week, season)),
+  fetchCappers: () => dispatch(capperActions.fetchCappers()),
   selectPick: (pick) => dispatch(pickActions.receivePick(pick)),
   clearPick: () => dispatch(pickActions.clearPick()),
 })
