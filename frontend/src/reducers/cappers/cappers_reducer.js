@@ -1,5 +1,4 @@
 import { RECEIVE_ALL_CAPPERS } from '../../actions/capper_actions';
-import { CREATE_PICK } from '../../actions/pick_actions'
 
 const cappersReducer = (state = [], action) => {
   Object.freeze(state);
@@ -10,9 +9,6 @@ const cappersReducer = (state = [], action) => {
         nextState[obj._id] = obj;
       })
       return nextState;
-    case CREATE_PICK:
-      // console.log(nextState)
-      // debugger
     default:
       return state;
   }

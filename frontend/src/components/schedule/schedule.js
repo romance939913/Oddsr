@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from "react-redux";
-import Pick from './pick';
+import Game from './game';
 import NFLSchedule from './sports/nfl_schedule';
 import NCAAFSchedule from './sports/ncaaf_schedule';
 import * as nflActions from '../../actions/schedule/nfl_actions';
 import * as ncaaActions from '../../actions/schedule/ncaaf_actions';
-import * as pickActions from '../../actions/pick_actions';
+import * as gameActions from '../../actions/game_actions';
 import * as capperActions from '../../actions/capper_actions'
 import RingLoader from "react-spinners/RingLoader";
 import Nav from '../nav/nav';
@@ -21,7 +21,7 @@ class Schedule extends React.Component {
   }
 
   componentDidMount() {
-    this.props.clearPick()
+    this.props.clearGame()
     this.props.fetchNFLTeams()
     this.props.fetchNFLSeason()
       .then(season => {
@@ -45,7 +45,7 @@ class Schedule extends React.Component {
   }
 
   setSport(selectedSport) {
-    this.props.clearPick();
+    this.props.clearGame();
     this.setState({
       sport: selectedSport
     })
@@ -98,11 +98,11 @@ class Schedule extends React.Component {
             onClick={() => this.setSport('ncaaf')}
           >NCAA Football</p>
         </div>
-        <div className="schedule-and-pick-container">
+        <div className="schedule-and-game-container">
           <div className="schedule-container">
             {selectedSchedule}
           </div>
-          <Pick sport={this.state.sport}/>
+          <Game sport={this.state.sport}/>
         </div>
       </div>
     );
@@ -129,8 +129,8 @@ const mapDispatchToProps = dispatch => ({
   fetchNCAAFSeason: () => dispatch(ncaaActions.fetchNCAAFSeason()),
   fetchOddsNCAAF: (week, season) => dispatch(ncaaActions.fetchOddsNCAAF(week, season)),
   fetchCappers: () => dispatch(capperActions.fetchCappers()),
-  selectPick: (pick) => dispatch(pickActions.receivePick(pick)),
-  clearPick: () => dispatch(pickActions.clearPick()),
+  receiveGame: (game) => dispatch(gameActions.receiveGame(game)),
+  clearGame: () => dispatch(gameActions.clearGame()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);

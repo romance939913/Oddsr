@@ -1,16 +1,16 @@
 import * as APIUtil from '../util/pick_util';
 
 export const CREATE_PICK = "CREATE_PICK"
-export const RECEIVE_PICK = "RECEIVE_PICK";
-export const CLEAR_PICK = "CLEAR_PICK";
+export const RECEIVE_GAME = "RECEIVE_GAME";
+export const CLEAR_GAME = "CLEAR_GAME";
 
-export const receivePick = pick => ({
-  type: RECEIVE_PICK,
-  pick
+export const receiveGame = game => ({
+  type: RECEIVE_GAME,
+  game
 });
 
-export const clearPick = () => ({
-  type: CLEAR_PICK,
+export const clearGame = () => ({
+  type: CLEAR_GAME,
 });
 
 export const createThePick = (pick) => ({

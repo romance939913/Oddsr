@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { parseDomain, fromUrl } from "parse-domain";
-import * as pickActions from '../../actions/pick_actions';
-import './pick.css'
+import * as pickActions from '../../actions/game_actions';
+import './game.css'
 
 class SelectedPick extends React.Component {
   constructor(props) {
@@ -11,24 +11,24 @@ class SelectedPick extends React.Component {
   }
 
   chooseBet(e) {
-    let selectedPick = this.props.pick.PregameOdds[e.currentTarget.id]
+    let selectedPick = this.props.game.PregameOdds[e.currentTarget.id]
     let payload = {
       capperId: this.props.capper.id,
       sport: this.props.sport,
       betType: e.currentTarget.innerHTML,
       team: 'pickedTeam',
       spread: `home: ${selectedPick.HomePointSpread}, away: ${selectedPick.AwayPointSpread}`,
-      globalGameId: this.props.pick.GlobalGameId,
+      globalGameId: this.props.game.GlobalGameId,
       gameOddId: selectedPick.GameOddId
     }
     this.props.createPick(payload)
   }
 
   render() {
-    if (this.props.pick.length === 0) return null;
+    if (this.props.game.length === 0) return null;
 
     const sitesArray = [];
-    this.props.pick.PregameOdds.forEach((book, idx) => {
+    this.props.game.PregameOdds.forEach((book, idx) => {
       // if (!book.SportsbookUrl) return;
       const { domain } = parseDomain(fromUrl(book.SportsbookUrl));
       sitesArray.push(
@@ -42,16 +42,16 @@ class SelectedPick extends React.Component {
               className="selected-pick-bet-type"
               id={idx}
               onClick={this.chooseBet}>Spread</p>
-            <p>{this.props.pick.HomeTeamName}: {book.HomePointSpread}</p>
-            <p>{this.props.pick.AwayTeamName}: {book.AwayPointSpread}</p>
+            <p>{this.props.game.HomeTeamName}: {book.HomePointSpread}</p>
+            <p>{this.props.game.AwayTeamName}: {book.AwayPointSpread}</p>
           </div>
           <div className="selected-pick-moneyline-container">
             <p 
               className="selected-pick-bet-type"
               id={idx}
               onClick={this.chooseBet}>Money Line</p>
-            <p>{this.props.pick.HomeTeamName}: {book.HomeMoneyLine}</p>
-            <p>{this.props.pick.AwayTeamName}: {book.AwayMoneyLine}</p>
+            <p>{this.props.game.HomeTeamName}: {book.HomeMoneyLine}</p>
+            <p>{this.props.game.AwayTeamName}: {book.AwayMoneyLine}</p>
           </div>
         </div>
       )
@@ -60,8 +60,8 @@ class SelectedPick extends React.Component {
     return (
       <div className="selected-pick-container">
         <div className="selected-pick-teams-container">
-          <p>{this.props.pick.HomeTeamName} vs.</p>
-          <p> {this.props.pick.AwayTeamName}</p>
+          <p>{this.props.game.HomeTeamName} vs.</p>
+          <p> {this.props.game.AwayTeamName}</p>
         </div>
         {sitesArray}
       </div>
@@ -70,13 +70,11 @@ class SelectedPick extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  pick: state.entities.pick,
+  game: state.entities.game,
   capper: state.session.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  receivePick: (pick) => dispatch(pickActions.receivePick(pick)),
-  clearPick: () => dispatch(pickActions.clearPick()),
   createPick: (pick) => dispatch(pickActions.createPick(pick))
 })
 

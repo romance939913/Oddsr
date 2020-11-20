@@ -1,21 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import * as pickActions from '../../../actions/pick_actions';
+import * as gameActions from '../../../actions/game_actions';
 import './nflSchedule.css'
 
-class SelectedPick extends React.Component {
+class SelectedGame extends React.Component {
   constructor(props) {
     super(props)
-    this.selectThePick = this.selectThePick.bind(this);
+    this.selectTheGame = this.selectTheGame.bind(this);
   }
 
-  selectThePick(e) {
-    let pickHomeTeam = this.props.nfl.schedule[e.currentTarget.id];
-    if (pickHomeTeam.HomeTeamId === this.props.pick.HomeTeamId) {
-      this.props.clearPick()
+  selectTheGame(e) {
+    let gameHomeTeam = this.props.nfl.schedule[e.currentTarget.id];
+    if (gameHomeTeam.HomeTeamId === this.props.game.HomeTeamId) {
+      this.props.clearGame()
     } else {
-      this.props.selectPick(pickHomeTeam);
+      this.props.selectGame(gameHomeTeam);
     }
   }
 
@@ -29,7 +29,7 @@ class SelectedPick extends React.Component {
           className="schedule-game-container"
           key={idx}
           id={game.HomeTeamId}
-          onClick={this.selectThePick}
+          onClick={this.selectTheGame}
         >
           <div className="schedule-game-matchup-container">
             <div className="schedule-game-homeTeam-container">
@@ -70,12 +70,12 @@ const mapStateToProps = (state, ownProps) => ({
   username: state.session.user.username,
   nfl: state.entities.schedule.nfl,
   ncaaf: state.entities.schedule.ncaaf,
-  pick: state.entities.pick,
+  game: state.entities.game,
 });
 
 const mapDispatchToProps = dispatch => ({
-  selectPick: (pick) => dispatch(pickActions.receivePick(pick)),
-  clearPick: () => dispatch(pickActions.clearPick())
+  selectGame: (game) => dispatch(gameActions.receiveGame(game)),
+  clearGame: () => dispatch(gameActions.clearGame())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectedPick);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectedGame);
