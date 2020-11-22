@@ -24,3 +24,23 @@
     color: red;
     cursor: pointer;
 }
+
+.pick-modal-close {
+    cursor: pointer;
+    margin-left: 30vw;
+}
+
+.pick-modal-close:hover {
+    color: red;
+}
+
+.modal-header-plus-close {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15vh;
+}
+
+.pick-selection-container {
+    display: flex;
+    justify-content: space-between;
+}

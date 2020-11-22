@@ -10,7 +10,9 @@ class SelectedGame extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      betType: 'Spread',
+      pick: {}
     }
     this.chooseBet = this.chooseBet.bind(this)
     this.openModal = this.openModal.bind(this)
@@ -31,9 +33,12 @@ class SelectedGame extends React.Component {
     this.props.createPick(payload)
   }
 
-  openModal() {
+  openModal(e, betType) {
+    let selectedPick = this.props.game.PregameOdds[e.currentTarget.id]
     this.setState({
-      modalIsOpen: true
+      modalIsOpen: true,
+      betType: betType,
+      pick: selectedPick
     })
   }
 
@@ -60,7 +65,7 @@ class SelectedGame extends React.Component {
             <p 
               className="selected-pick-bet-type"
               id={idx}
-              onClick={this.openModal}>Spread</p>
+              onClick={(event) => this.openModal(event, 'PointSpread')}>Spread</p>
             <p>{this.props.game.HomeTeamName}: {book.HomePointSpread}</p>
             <p>{this.props.game.AwayTeamName}: {book.AwayPointSpread}</p>
           </div>
@@ -68,7 +73,7 @@ class SelectedGame extends React.Component {
             <p 
               className="selected-pick-bet-type"
               id={idx}
-              onClick={this.openModal}>Money Line</p>
+              onClick={(event) => this.openModal(event, 'MoneyLine')}>Money Line</p>
             <p>{this.props.game.HomeTeamName}: {book.HomeMoneyLine}</p>
             <p>{this.props.game.AwayTeamName}: {book.AwayMoneyLine}</p>
           </div>
@@ -96,21 +101,28 @@ class SelectedGame extends React.Component {
         {sitesArray}
         <Modal
           isOpen={this.state.modalIsOpen}
-          // onAfterOpen={afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2 /*ref={_subtitle => (subtitle = _subtitle)}*/>Hello</h2>
-          <button onClick={this.closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
+          <div className="modal-header-plus-close">
+            <h2>{this.state.betType}</h2>
+            <p 
+              className="pick-modal-close"
+              onClick={this.closeModal}
+            >x</p>
+          </div>
+          <div 
+            className="pick-selection-container"
+            onClick={this.chooseBet}  
+          >
+            <p>{this.props.schedule[this.props.sport].teams[this.props.game.HomeTeamId].FullName}</p>
+            <p>{this.state.pick[`Home${this.state.betType}`]}</p>
+          </div>
+          <div className="pick-selection-container">
+            <p>{this.props.schedule[this.props.sport].teams[this.props.game.AwayTeamId].FullName}</p>
+            <p>{this.state.pick[`Away${this.state.betType}`]}</p>
+          </div>
         </Modal>
       </div>
     )
@@ -119,7 +131,8 @@ class SelectedGame extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   game: state.entities.game,
-  capper: state.session.user
+  capper: state.session.user,
+  schedule: state.entities.schedule
 })
 
 const mapDispatchToProps = dispatch => ({
